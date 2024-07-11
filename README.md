@@ -61,7 +61,7 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar
 Para mudanças importantes, abra uma issue primeiro para discutir o que você gostaria de mudar.
 
 Licença
-Este projeto está licenciado sob a MIT License.
+Este projeto está licenciado sob a [GPL-3 License](https://github.com/Unity-King/ScrollMaster-2D#GPL-3.0-1-ov-file).
 
 <a href="https://unityking.org/">
   <img src="https://github.com/Unity-King/ScrollMaster-2D-/assets/74227915/a204d0be-1263-4bd2-b02d-c4f67137fd80" alt="UnityKing" width="100" height="100">
