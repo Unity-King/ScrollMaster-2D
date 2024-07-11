@@ -4,7 +4,7 @@ ScrollMaster 2D é uma base completa para a criação de jogos 2D side-scrolling
 
 ## Recursos
 - [**Sistema Avançado de TileMap**](https://github.com/Unity-King/ScrollMaster-2D/pull/1)
-- **Personagem Jogável:** Animações de movimento e salto, controle responsivo.
+- [**Personagem Jogável:**.](https://github.com/Unity-King/ScrollMaster-2D/pull/3)
 - **Cenário 2D:** Tilesets, plataformas e fundos parallax.
 - **Física e Colisões:** Configurações realistas e precisas.
 - **Sistema de Inimigos:** IA básica, animações e sistema de dano.
