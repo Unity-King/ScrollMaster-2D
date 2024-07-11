@@ -17,15 +17,15 @@ ScrollMaster 2D é uma base completa para a criação de jogos 2D side-scrolling
 O projeto está organizado da seguinte forma:
 ```
 Assets/
-├── Animations/ #### Animações do personagem e inimigos
-├── Audios/ #### Sons de efeitos e músicas de fundo
-├── Prefabs/ #### Objetos pré-fabricados (personagem, inimigos, etc.)
+├── Resources/Animations/ #### Animações do personagem e inimigos
+├── Resources/Audios/ #### Sons de efeitos e músicas de fundo
+├── Resources/Prefabs/ #### Objetos pré-fabricados (personagem, inimigos, etc.)
+├── Resources/Scriptable/ #### Objetos Scriptable para configuração avançada
+├── Resources/Sprites/ #### Imagens e sprites usados no jogo
 ├── Scripts/ #### Scripts de controle e lógica do jogo
 │ ├── Config/ #### Configurações e dados do jogo
 │ ├── Controllers/ #### Scripts de controle do personagem e inimigos
 │ ├── Managers/ #### Gerenciamento de áudio, UI e outros sistemas
-│ └── Scriptable/ #### Objetos Scriptable para configuração avançada
-├── Sprites/ #### Imagens e sprites usados no jogo
 └── Scenes/ #### Cenas do jogo
 ```
 ## Configurações Avançadas Usando Scriptable Objects
