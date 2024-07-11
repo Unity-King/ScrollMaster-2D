@@ -16,6 +16,6 @@ MonoBehaviour:
   damage: 10
   speed: 5
   hotkey: 282
-  spellPrefab: {fileID: 0}
-  spellSprite: {fileID: 0}
+  spellPrefab: {fileID: 7761722737627517072, guid: a03003b9bd5373743a034cfd0145e928, type: 3}
+  spellSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   usePrefab: 1
