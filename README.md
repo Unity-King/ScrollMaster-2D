@@ -46,7 +46,7 @@ Para aprender mais sobre Scriptable Objects e como dominá-los, confira nosso tu
 
 Clone o Repositório:
 ```sh
-git clone https://github.com/seu-usuario/scrollmaster-2d.git
+git clone https://github.com/Unity-King/ScrollMaster-2D
 ```
 Abra o Projeto na Unity:
 
