@@ -10,7 +10,7 @@ namespace ScrollMaster2D.Controllers
         public float jumpForce = 10f;
         public float attackCooldown = 0.5f;
 
-        private Animator animator;
+        private AnimatorCharacter animatorController;
         private Rigidbody2D rb;
         private Health healthController;
         private Stats statsController;
@@ -38,12 +38,12 @@ namespace ScrollMaster2D.Controllers
 
         private void InitializeCharacter()
         {
-            animator = GetComponent<Animator>();
-            if (animator == null)
+            animatorController = GetComponent<AnimatorCharacter>();
+            if (animatorController == null)
             {
-                animator = gameObject.AddComponent<Animator>();
+                animatorController = gameObject.AddComponent<AnimatorCharacter>();
             }
-            animator.runtimeAnimatorController = characterConfig.animatorController;
+            animatorController.Initialize(characterConfig);
 
             rb = GetComponent<Rigidbody2D>();
             if (rb == null)
@@ -76,14 +76,14 @@ namespace ScrollMaster2D.Controllers
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
 
-            animator.SetFloat("Speed", Mathf.Abs(moveInput));
+            animatorController.SetFloat("Speed", Mathf.Abs(moveInput));
         }
 
         private void HandleAttacks()
         {
             if (Input.GetButtonDown("Fire1") && Time.time >= nextAttackTime)
             {
-                animator.SetTrigger("Attack");
+                animatorController.SetTrigger("Attack");
                 // Lógica de ataque aqui, usando statsController.AttackPower
                 nextAttackTime = Time.time + attackCooldown;
             }
