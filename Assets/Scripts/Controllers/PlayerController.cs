@@ -4,7 +4,7 @@ using ScrollMaster2D.Controllers;
 
 namespace ScrollMaster2D.Controllers
 {
-    public class PlayerController : MonoBehaviour
+    public class Player : MonoBehaviour
     {
         public Character characterConfig;
         public float jumpForce = 10f;

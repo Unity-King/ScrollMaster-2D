@@ -1,11 +1,14 @@
 using UnityEngine;
 using ScrollMaster2D.Config;
+using ScrollMaster2D.UI;
+using System;
 
 namespace ScrollMaster2D.Controllers
 {
     public class Health : MonoBehaviour
     {
         private Character characterConfig;
+        public HealthBar healthBar;
 
         [SerializeField]
         private float baseMaxHealth;
@@ -30,6 +33,10 @@ namespace ScrollMaster2D.Controllers
         {
             maxHealth = baseMaxHealth + (characterConfig.level * healthPerLevel);
             currentHealth = maxHealth;
+            healthBar.SetMaxHealth(currentHealth);
+            healthBar.SetHealth(currentHealth);
+            Debug.Log("Teste Update Health Function Current Health : " + currentHealth);
+
         }
 
         public void TakeDamage(float damage)
