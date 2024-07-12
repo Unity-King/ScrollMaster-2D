@@ -1461,7 +1461,7 @@ TextureImporter:
       213: 21300970
     second: tilemap_485
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -1478,9 +1478,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1490,8 +1493,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -1512,10 +1515,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -1527,6 +1535,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 1
   - serializedVersion: 3
@@ -1539,6 +1548,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
@@ -11760,9 +11770,495 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: RuleOverrideTile
+    nameFileIdTable:
+      tilemap_0: 21300000
+      tilemap_1: 21300002
+      tilemap_10: 21300020
+      tilemap_100: 21300200
+      tilemap_101: 21300202
+      tilemap_102: 21300204
+      tilemap_103: 21300206
+      tilemap_104: 21300208
+      tilemap_105: 21300210
+      tilemap_106: 21300212
+      tilemap_107: 21300214
+      tilemap_108: 21300216
+      tilemap_109: 21300218
+      tilemap_11: 21300022
+      tilemap_110: 21300220
+      tilemap_111: 21300222
+      tilemap_112: 21300224
+      tilemap_113: 21300226
+      tilemap_114: 21300228
+      tilemap_115: 21300230
+      tilemap_116: 21300232
+      tilemap_117: 21300234
+      tilemap_118: 21300236
+      tilemap_119: 21300238
+      tilemap_12: 21300024
+      tilemap_120: 21300240
+      tilemap_121: 21300242
+      tilemap_122: 21300244
+      tilemap_123: 21300246
+      tilemap_124: 21300248
+      tilemap_125: 21300250
+      tilemap_126: 21300252
+      tilemap_127: 21300254
+      tilemap_128: 21300256
+      tilemap_129: 21300258
+      tilemap_13: 21300026
+      tilemap_130: 21300260
+      tilemap_131: 21300262
+      tilemap_132: 21300264
+      tilemap_133: 21300266
+      tilemap_134: 21300268
+      tilemap_135: 21300270
+      tilemap_136: 21300272
+      tilemap_137: 21300274
+      tilemap_138: 21300276
+      tilemap_139: 21300278
+      tilemap_14: 21300028
+      tilemap_140: 21300280
+      tilemap_141: 21300282
+      tilemap_142: 21300284
+      tilemap_143: 21300286
+      tilemap_144: 21300288
+      tilemap_145: 21300290
+      tilemap_146: 21300292
+      tilemap_147: 21300294
+      tilemap_148: 21300296
+      tilemap_149: 21300298
+      tilemap_15: 21300030
+      tilemap_150: 21300300
+      tilemap_151: 21300302
+      tilemap_152: 21300304
+      tilemap_153: 21300306
+      tilemap_154: 21300308
+      tilemap_155: 21300310
+      tilemap_156: 21300312
+      tilemap_157: 21300314
+      tilemap_158: 21300316
+      tilemap_159: 21300318
+      tilemap_16: 21300032
+      tilemap_160: 21300320
+      tilemap_161: 21300322
+      tilemap_162: 21300324
+      tilemap_163: 21300326
+      tilemap_164: 21300328
+      tilemap_165: 21300330
+      tilemap_166: 21300332
+      tilemap_167: 21300334
+      tilemap_168: 21300336
+      tilemap_169: 21300338
+      tilemap_17: 21300034
+      tilemap_170: 21300340
+      tilemap_171: 21300342
+      tilemap_172: 21300344
+      tilemap_173: 21300346
+      tilemap_174: 21300348
+      tilemap_175: 21300350
+      tilemap_176: 21300352
+      tilemap_177: 21300354
+      tilemap_178: 21300356
+      tilemap_179: 21300358
+      tilemap_18: 21300036
+      tilemap_180: 21300360
+      tilemap_181: 21300362
+      tilemap_182: 21300364
+      tilemap_183: 21300366
+      tilemap_184: 21300368
+      tilemap_185: 21300370
+      tilemap_186: 21300372
+      tilemap_187: 21300374
+      tilemap_188: 21300376
+      tilemap_189: 21300378
+      tilemap_19: 21300038
+      tilemap_190: 21300380
+      tilemap_191: 21300382
+      tilemap_192: 21300384
+      tilemap_193: 21300386
+      tilemap_194: 21300388
+      tilemap_195: 21300390
+      tilemap_196: 21300392
+      tilemap_197: 21300394
+      tilemap_198: 21300396
+      tilemap_199: 21300398
+      tilemap_2: 21300004
+      tilemap_20: 21300040
+      tilemap_200: 21300400
+      tilemap_201: 21300402
+      tilemap_202: 21300404
+      tilemap_203: 21300406
+      tilemap_204: 21300408
+      tilemap_205: 21300410
+      tilemap_206: 21300412
+      tilemap_207: 21300414
+      tilemap_208: 21300416
+      tilemap_209: 21300418
+      tilemap_21: 21300042
+      tilemap_210: 21300420
+      tilemap_211: 21300422
+      tilemap_212: 21300424
+      tilemap_213: 21300426
+      tilemap_214: 21300428
+      tilemap_215: 21300430
+      tilemap_216: 21300432
+      tilemap_217: 21300434
+      tilemap_218: 21300436
+      tilemap_219: 21300438
+      tilemap_22: 21300044
+      tilemap_220: 21300440
+      tilemap_221: 21300442
+      tilemap_222: 21300444
+      tilemap_223: 21300446
+      tilemap_224: 21300448
+      tilemap_225: 21300450
+      tilemap_226: 21300452
+      tilemap_227: 21300454
+      tilemap_228: 21300456
+      tilemap_229: 21300458
+      tilemap_23: 21300046
+      tilemap_230: 21300460
+      tilemap_231: 21300462
+      tilemap_232: 21300464
+      tilemap_233: 21300466
+      tilemap_234: 21300468
+      tilemap_235: 21300470
+      tilemap_236: 21300472
+      tilemap_237: 21300474
+      tilemap_238: 21300476
+      tilemap_239: 21300478
+      tilemap_24: 21300048
+      tilemap_240: 21300480
+      tilemap_241: 21300482
+      tilemap_242: 21300484
+      tilemap_243: 21300486
+      tilemap_244: 21300488
+      tilemap_245: 21300490
+      tilemap_246: 21300492
+      tilemap_247: 21300494
+      tilemap_248: 21300496
+      tilemap_249: 21300498
+      tilemap_25: 21300050
+      tilemap_250: 21300500
+      tilemap_251: 21300502
+      tilemap_252: 21300504
+      tilemap_253: 21300506
+      tilemap_254: 21300508
+      tilemap_255: 21300510
+      tilemap_256: 21300512
+      tilemap_257: 21300514
+      tilemap_258: 21300516
+      tilemap_259: 21300518
+      tilemap_26: 21300052
+      tilemap_260: 21300520
+      tilemap_261: 21300522
+      tilemap_262: 21300524
+      tilemap_263: 21300526
+      tilemap_264: 21300528
+      tilemap_265: 21300530
+      tilemap_266: 21300532
+      tilemap_267: 21300534
+      tilemap_268: 21300536
+      tilemap_269: 21300538
+      tilemap_27: 21300054
+      tilemap_270: 21300540
+      tilemap_271: 21300542
+      tilemap_272: 21300544
+      tilemap_273: 21300546
+      tilemap_274: 21300548
+      tilemap_275: 21300550
+      tilemap_276: 21300552
+      tilemap_277: 21300554
+      tilemap_278: 21300556
+      tilemap_279: 21300558
+      tilemap_28: 21300056
+      tilemap_280: 21300560
+      tilemap_281: 21300562
+      tilemap_282: 21300564
+      tilemap_283: 21300566
+      tilemap_284: 21300568
+      tilemap_285: 21300570
+      tilemap_286: 21300572
+      tilemap_287: 21300574
+      tilemap_288: 21300576
+      tilemap_289: 21300578
+      tilemap_29: 21300058
+      tilemap_290: 21300580
+      tilemap_291: 21300582
+      tilemap_292: 21300584
+      tilemap_293: 21300586
+      tilemap_294: 21300588
+      tilemap_295: 21300590
+      tilemap_296: 21300592
+      tilemap_297: 21300594
+      tilemap_298: 21300596
+      tilemap_299: 21300598
+      tilemap_3: 21300006
+      tilemap_30: 21300060
+      tilemap_300: 21300600
+      tilemap_301: 21300602
+      tilemap_302: 21300604
+      tilemap_303: 21300606
+      tilemap_304: 21300608
+      tilemap_305: 21300610
+      tilemap_306: 21300612
+      tilemap_307: 21300614
+      tilemap_308: 21300616
+      tilemap_309: 21300618
+      tilemap_31: 21300062
+      tilemap_310: 21300620
+      tilemap_311: 21300622
+      tilemap_312: 21300624
+      tilemap_313: 21300626
+      tilemap_314: 21300628
+      tilemap_315: 21300630
+      tilemap_316: 21300632
+      tilemap_317: 21300634
+      tilemap_318: 21300636
+      tilemap_319: 21300638
+      tilemap_32: 21300064
+      tilemap_320: 21300640
+      tilemap_321: 21300642
+      tilemap_322: 21300644
+      tilemap_323: 21300646
+      tilemap_324: 21300648
+      tilemap_325: 21300650
+      tilemap_326: 21300652
+      tilemap_327: 21300654
+      tilemap_328: 21300656
+      tilemap_329: 21300658
+      tilemap_33: 21300066
+      tilemap_330: 21300660
+      tilemap_331: 21300662
+      tilemap_332: 21300664
+      tilemap_333: 21300666
+      tilemap_334: 21300668
+      tilemap_335: 21300670
+      tilemap_336: 21300672
+      tilemap_337: 21300674
+      tilemap_338: 21300676
+      tilemap_339: 21300678
+      tilemap_34: 21300068
+      tilemap_340: 21300680
+      tilemap_341: 21300682
+      tilemap_342: 21300684
+      tilemap_343: 21300686
+      tilemap_344: 21300688
+      tilemap_345: 21300690
+      tilemap_346: 21300692
+      tilemap_347: 21300694
+      tilemap_348: 21300696
+      tilemap_349: 21300698
+      tilemap_35: 21300070
+      tilemap_350: 21300700
+      tilemap_351: 21300702
+      tilemap_352: 21300704
+      tilemap_353: 21300706
+      tilemap_354: 21300708
+      tilemap_355: 21300710
+      tilemap_356: 21300712
+      tilemap_357: 21300714
+      tilemap_358: 21300716
+      tilemap_359: 21300718
+      tilemap_36: 21300072
+      tilemap_360: 21300720
+      tilemap_361: 21300722
+      tilemap_362: 21300724
+      tilemap_363: 21300726
+      tilemap_364: 21300728
+      tilemap_365: 21300730
+      tilemap_366: 21300732
+      tilemap_367: 21300734
+      tilemap_368: 21300736
+      tilemap_369: 21300738
+      tilemap_37: 21300074
+      tilemap_370: 21300740
+      tilemap_371: 21300742
+      tilemap_372: 21300744
+      tilemap_373: 21300746
+      tilemap_374: 21300748
+      tilemap_375: 21300750
+      tilemap_376: 21300752
+      tilemap_377: 21300754
+      tilemap_378: 21300756
+      tilemap_379: 21300758
+      tilemap_38: 21300076
+      tilemap_380: 21300760
+      tilemap_381: 21300762
+      tilemap_382: 21300764
+      tilemap_383: 21300766
+      tilemap_384: 21300768
+      tilemap_385: 21300770
+      tilemap_386: 21300772
+      tilemap_387: 21300774
+      tilemap_388: 21300776
+      tilemap_389: 21300778
+      tilemap_39: 21300078
+      tilemap_390: 21300780
+      tilemap_391: 21300782
+      tilemap_392: 21300784
+      tilemap_393: 21300786
+      tilemap_394: 21300788
+      tilemap_395: 21300790
+      tilemap_396: 21300792
+      tilemap_397: 21300794
+      tilemap_398: 21300796
+      tilemap_399: 21300798
+      tilemap_4: 21300008
+      tilemap_40: 21300080
+      tilemap_400: 21300800
+      tilemap_401: 21300802
+      tilemap_402: 21300804
+      tilemap_403: 21300806
+      tilemap_404: 21300808
+      tilemap_405: 21300810
+      tilemap_406: 21300812
+      tilemap_407: 21300814
+      tilemap_408: 21300816
+      tilemap_409: 21300818
+      tilemap_41: 21300082
+      tilemap_410: 21300820
+      tilemap_411: 21300822
+      tilemap_412: 21300824
+      tilemap_413: 21300826
+      tilemap_414: 21300828
+      tilemap_415: 21300830
+      tilemap_416: 21300832
+      tilemap_417: 21300834
+      tilemap_418: 21300836
+      tilemap_419: 21300838
+      tilemap_42: 21300084
+      tilemap_420: 21300840
+      tilemap_421: 21300842
+      tilemap_422: 21300844
+      tilemap_423: 21300846
+      tilemap_424: 21300848
+      tilemap_425: 21300850
+      tilemap_426: 21300852
+      tilemap_427: 21300854
+      tilemap_428: 21300856
+      tilemap_429: 21300858
+      tilemap_43: 21300086
+      tilemap_430: 21300860
+      tilemap_431: 21300862
+      tilemap_432: 21300864
+      tilemap_433: 21300866
+      tilemap_434: 21300868
+      tilemap_435: 21300870
+      tilemap_436: 21300872
+      tilemap_437: 21300874
+      tilemap_438: 21300876
+      tilemap_439: 21300878
+      tilemap_44: 21300088
+      tilemap_440: 21300880
+      tilemap_441: 21300882
+      tilemap_442: 21300884
+      tilemap_443: 21300886
+      tilemap_444: 21300888
+      tilemap_445: 21300890
+      tilemap_446: 21300892
+      tilemap_447: 21300894
+      tilemap_448: 21300896
+      tilemap_449: 21300898
+      tilemap_45: 21300090
+      tilemap_450: 21300900
+      tilemap_451: 21300902
+      tilemap_452: 21300904
+      tilemap_453: 21300906
+      tilemap_454: 21300908
+      tilemap_455: 21300910
+      tilemap_456: 21300912
+      tilemap_457: 21300914
+      tilemap_458: 21300916
+      tilemap_459: 21300918
+      tilemap_46: 21300092
+      tilemap_460: 21300920
+      tilemap_461: 21300922
+      tilemap_462: 21300924
+      tilemap_463: 21300926
+      tilemap_464: 21300928
+      tilemap_465: 21300930
+      tilemap_466: 21300932
+      tilemap_467: 21300934
+      tilemap_468: 21300936
+      tilemap_469: 21300938
+      tilemap_47: 21300094
+      tilemap_470: 21300940
+      tilemap_471: 21300942
+      tilemap_472: 21300944
+      tilemap_473: 21300946
+      tilemap_474: 21300948
+      tilemap_475: 21300950
+      tilemap_476: 21300952
+      tilemap_477: 21300954
+      tilemap_478: 21300956
+      tilemap_479: 21300958
+      tilemap_48: 21300096
+      tilemap_480: 21300960
+      tilemap_481: 21300962
+      tilemap_482: 21300964
+      tilemap_483: 21300966
+      tilemap_484: 21300968
+      tilemap_485: 21300970
+      tilemap_49: 21300098
+      tilemap_5: 21300010
+      tilemap_50: 21300100
+      tilemap_51: 21300102
+      tilemap_52: 21300104
+      tilemap_53: 21300106
+      tilemap_54: 21300108
+      tilemap_55: 21300110
+      tilemap_56: 21300112
+      tilemap_57: 21300114
+      tilemap_58: 21300116
+      tilemap_59: 21300118
+      tilemap_6: 21300012
+      tilemap_60: 21300120
+      tilemap_61: 21300122
+      tilemap_62: 21300124
+      tilemap_63: 21300126
+      tilemap_64: 21300128
+      tilemap_65: 21300130
+      tilemap_66: 21300132
+      tilemap_67: 21300134
+      tilemap_68: 21300136
+      tilemap_69: 21300138
+      tilemap_7: 21300014
+      tilemap_70: 21300140
+      tilemap_71: 21300142
+      tilemap_72: 21300144
+      tilemap_73: 21300146
+      tilemap_74: 21300148
+      tilemap_75: 21300150
+      tilemap_76: 21300152
+      tilemap_77: 21300154
+      tilemap_78: 21300156
+      tilemap_79: 21300158
+      tilemap_8: 21300016
+      tilemap_80: 21300160
+      tilemap_81: 21300162
+      tilemap_82: 21300164
+      tilemap_83: 21300166
+      tilemap_84: 21300168
+      tilemap_85: 21300170
+      tilemap_86: 21300172
+      tilemap_87: 21300174
+      tilemap_88: 21300176
+      tilemap_89: 21300178
+      tilemap_9: 21300018
+      tilemap_90: 21300180
+      tilemap_91: 21300182
+      tilemap_92: 21300184
+      tilemap_93: 21300186
+      tilemap_94: 21300188
+      tilemap_95: 21300190
+      tilemap_96: 21300192
+      tilemap_97: 21300194
+      tilemap_98: 21300196
+      tilemap_99: 21300198
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

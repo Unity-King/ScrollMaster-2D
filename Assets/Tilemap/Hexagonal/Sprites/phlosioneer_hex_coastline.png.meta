@@ -297,7 +297,7 @@ TextureImporter:
       213: -8943396484894833104
     second: phlosioneer_hex_coastline_97
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -314,9 +314,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -325,9 +328,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -348,10 +351,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -363,6 +371,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -375,6 +384,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1755,9 +1765,74 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      phlosioneer_hex_coastline_0: 5162145161477998218
+      phlosioneer_hex_coastline_1: -7772369591558481448
+      phlosioneer_hex_coastline_11: -5850968906795414700
+      phlosioneer_hex_coastline_12: 2008848190868420992
+      phlosioneer_hex_coastline_13: -161558973731093072
+      phlosioneer_hex_coastline_14: 6246787038950676762
+      phlosioneer_hex_coastline_15: -6240998890507295936
+      phlosioneer_hex_coastline_16: 5417962196115143298
+      phlosioneer_hex_coastline_2: 7744652295409265220
+      phlosioneer_hex_coastline_21: 4013628170891214827
+      phlosioneer_hex_coastline_22: -2987472314270852498
+      phlosioneer_hex_coastline_23: -8742339339636463004
+      phlosioneer_hex_coastline_24: -7315550873170272062
+      phlosioneer_hex_coastline_25: 7128388070065929718
+      phlosioneer_hex_coastline_26: 4095992627761004173
+      phlosioneer_hex_coastline_27: 835369068807031055
+      phlosioneer_hex_coastline_28: 5207923607781363064
+      phlosioneer_hex_coastline_29: -6469325502197494792
+      phlosioneer_hex_coastline_31: -3401018750579893771
+      phlosioneer_hex_coastline_32: -4750364208000305871
+      phlosioneer_hex_coastline_33: -5724555364617670926
+      phlosioneer_hex_coastline_34: 4992173578014144388
+      phlosioneer_hex_coastline_35: 5569997280073626019
+      phlosioneer_hex_coastline_36: 6726670833890562716
+      phlosioneer_hex_coastline_38: -509343358299181711
+      phlosioneer_hex_coastline_39: 5531184023058837828
+      phlosioneer_hex_coastline_40: 1799905889621990895
+      phlosioneer_hex_coastline_41: 9130366216404179690
+      phlosioneer_hex_coastline_42: 1349992252054643961
+      phlosioneer_hex_coastline_43: 8581496535778410265
+      phlosioneer_hex_coastline_44: 7394859047626385460
+      phlosioneer_hex_coastline_45: -5938833261937882319
+      phlosioneer_hex_coastline_46: 1556635318697243008
+      phlosioneer_hex_coastline_47: 8123735211553451151
+      phlosioneer_hex_coastline_48: 191561497125410987
+      phlosioneer_hex_coastline_50: -2238631621814056581
+      phlosioneer_hex_coastline_51: 8132629871226496955
+      phlosioneer_hex_coastline_52: 7719391929430961588
+      phlosioneer_hex_coastline_53: 4232979172456257265
+      phlosioneer_hex_coastline_54: 8927444922869429342
+      phlosioneer_hex_coastline_55: 6744663040978097094
+      phlosioneer_hex_coastline_56: 2359015077439550265
+      phlosioneer_hex_coastline_57: 3659643688871625911
+      phlosioneer_hex_coastline_58: 5320585036714409686
+      phlosioneer_hex_coastline_60: -9037205820507072329
+      phlosioneer_hex_coastline_61: 3995878113284538192
+      phlosioneer_hex_coastline_62: -625427066745340524
+      phlosioneer_hex_coastline_63: -2708862727706825644
+      phlosioneer_hex_coastline_64: 5758164371667960713
+      phlosioneer_hex_coastline_65: 1202443615772725555
+      phlosioneer_hex_coastline_66: -6595699491368468373
+      phlosioneer_hex_coastline_67: -3979446247128807029
+      phlosioneer_hex_coastline_68: 5648425016658885233
+      phlosioneer_hex_coastline_70: -4026045743815860525
+      phlosioneer_hex_coastline_71: -2331833410108969552
+      phlosioneer_hex_coastline_72: -6750894794043661708
+      phlosioneer_hex_coastline_73: 1342575998140030622
+      phlosioneer_hex_coastline_74: -6807814645938061978
+      phlosioneer_hex_coastline_75: 864590415470341297
+      phlosioneer_hex_coastline_77: -1017075937599113819
+      phlosioneer_hex_coastline_78: 1911328057343189719
+      phlosioneer_hex_coastline_79: 170598725158887110
+      phlosioneer_hex_coastline_80: 9107396678450890309
+      phlosioneer_hex_coastline_81: -4256845461264504338
+      phlosioneer_hex_coastline_82: -9157096905903380784
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

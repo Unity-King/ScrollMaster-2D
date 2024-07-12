@@ -1,11 +1,19 @@
 using UnityEngine;
-using ScrollMaster2D.Config.Character;
+using ScrollMaster2D.Config;
+using ScrollMaster2D.Controllers;
 
 public class PlayerController : MonoBehaviour
 {
-    public CharacterConfig characterConfig;
+    public Character characterConfig;
+    public float jumpForce = 10f;
+    public float attackCooldown = 0.5f;
+
     private Animator animator;
     private Rigidbody2D rb;
+    private Health healthController;
+    private Stats statsController;
+    private float nextAttackTime = 0f;
+    private bool isGrounded;
 
     void Start()
     {
@@ -40,6 +48,20 @@ public class PlayerController : MonoBehaviour
         {
             rb = gameObject.AddComponent<Rigidbody2D>();
         }
+
+        healthController = GetComponent<Health>();
+        if (healthController == null)
+        {
+            healthController = gameObject.AddComponent<Health>();
+        }
+        healthController.Initialize(characterConfig);
+
+        statsController = GetComponent<Stats>();
+        if (statsController == null)
+        {
+            statsController = gameObject.AddComponent<Stats>();
+        }
+        statsController.Initialize(characterConfig);
     }
 
     private void HandleMovement()
@@ -47,9 +69,9 @@ public class PlayerController : MonoBehaviour
         float moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(moveInput * characterConfig.moveSpeed, rb.velocity.y);
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rb.velocity = new Vector2(rb.velocity.x, characterConfig.moveSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
         animator.SetFloat("Speed", Mathf.Abs(moveInput));
@@ -57,10 +79,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleAttacks()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && Time.time >= nextAttackTime)
         {
             animator.SetTrigger("Attack");
-            // Lógica de ataque aqui
+            // Lógica de ataque aqui, usando statsController.AttackPower
+            nextAttackTime = Time.time + attackCooldown;
         }
     }
 
@@ -75,7 +98,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CastSpell(SpellConfig spell)
+    private void CastSpell(Spell spell)
     {
         if (spell.usePrefab && spell.spellPrefab != null)
         {
@@ -87,5 +110,21 @@ public class PlayerController : MonoBehaviour
         }
 
         Debug.Log($"{characterConfig.characterName} cast {spell.spellName}");
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }

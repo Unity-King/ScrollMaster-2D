@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace ScrollMaster2D.Config.Character
+namespace ScrollMaster2D.Config
 {
     [CreateAssetMenu(fileName = "NewCharacterConfig", menuName = "Configs/Character/New")]
-    public class CharacterConfig : ScriptableObject
+    public class Character : ScriptableObject
     {
         [Header("Informações Básicas")]
         public string characterName = "Default";
@@ -16,7 +16,7 @@ namespace ScrollMaster2D.Config.Character
         public float moveSpeed = 5f;
 
         [Header("Habilidades")]
-        public SpellConfig[] spells;
+        public Spell[] spells;
 
         [Header("Animação")]
         public RuntimeAnimatorController animatorController;

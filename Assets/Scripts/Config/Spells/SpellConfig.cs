@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace ScrollMaster2D.Config.Character
+namespace ScrollMaster2D.Config
 {
     [CreateAssetMenu(fileName = "NewSpellConfig", menuName = "Configs/Character/Spell/New")]
-    public class SpellConfig : ScriptableObject
+    public class Spell : ScriptableObject
     {
         [Header("Informações Básicas")]
         public string spellName = "DefaultSpell";
