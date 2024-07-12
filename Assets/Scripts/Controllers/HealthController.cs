@@ -1,23 +1,35 @@
-using ScrollMaster2D.Config;
 using UnityEngine;
+using ScrollMaster2D.Config;
 
 namespace ScrollMaster2D.Controllers
 {
     public class Health : MonoBehaviour
     {
         private Character characterConfig;
-        [SerializeField]private float currentHealth;
 
-        void Start()
-        {
-            // Inicializa a saúde com a saúde máxima do personagem
-            currentHealth = characterConfig.maxHealth;
-        }
+        [SerializeField]
+        private float baseMaxHealth;
+
+        [SerializeField]
+        private float healthPerLevel;
+
+        [SerializeField]
+        private float currentHealth;
+
+        [SerializeField]
+        private float maxHealth;
 
         public void Initialize(Character config)
         {
             characterConfig = config;
-            currentHealth = characterConfig.maxHealth;
+            baseMaxHealth = characterConfig.maxHealth;
+            UpdateHealth();
+        }
+
+        public void UpdateHealth()
+        {
+            maxHealth = baseMaxHealth + (characterConfig.level * healthPerLevel);
+            currentHealth = maxHealth;
         }
 
         public void TakeDamage(float damage)
@@ -36,9 +48,9 @@ namespace ScrollMaster2D.Controllers
         public void Heal(float amount)
         {
             currentHealth += amount;
-            if (currentHealth > characterConfig.maxHealth)
+            if (currentHealth > maxHealth)
             {
-                currentHealth = characterConfig.maxHealth;
+                currentHealth = maxHealth;
             }
         }
 

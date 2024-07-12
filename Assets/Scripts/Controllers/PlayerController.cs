@@ -2,129 +2,132 @@ using UnityEngine;
 using ScrollMaster2D.Config;
 using ScrollMaster2D.Controllers;
 
-public class PlayerController : MonoBehaviour
+namespace ScrollMaster2D.Controllers
 {
-    public Character characterConfig;
-    public float jumpForce = 10f;
-    public float attackCooldown = 0.5f;
-
-    private Animator animator;
-    private Rigidbody2D rb;
-    private Health healthController;
-    private Stats statsController;
-    private float nextAttackTime = 0f;
-    private bool isGrounded;
-
-    void Start()
+    public class PlayerController : MonoBehaviour
     {
-        if (characterConfig != null)
+        public Character characterConfig;
+        public float jumpForce = 10f;
+        public float attackCooldown = 0.5f;
+
+        private Animator animator;
+        private Rigidbody2D rb;
+        private Health healthController;
+        private Stats statsController;
+        private float nextAttackTime = 0f;
+        private bool isGrounded;
+
+        void Start()
         {
-            InitializeCharacter();
-        }
-        else
-        {
-            Debug.LogError("CharacterConfig is not assigned.");
-        }
-    }
-
-    void Update()
-    {
-        HandleMovement();
-        HandleAttacks();
-        HandleSpells();
-    }
-
-    private void InitializeCharacter()
-    {
-        animator = GetComponent<Animator>();
-        if (animator == null)
-        {
-            animator = gameObject.AddComponent<Animator>();
-        }
-        animator.runtimeAnimatorController = characterConfig.animatorController;
-
-        rb = GetComponent<Rigidbody2D>();
-        if (rb == null)
-        {
-            rb = gameObject.AddComponent<Rigidbody2D>();
-        }
-
-        healthController = GetComponent<Health>();
-        if (healthController == null)
-        {
-            healthController = gameObject.AddComponent<Health>();
-        }
-        healthController.Initialize(characterConfig);
-
-        statsController = GetComponent<Stats>();
-        if (statsController == null)
-        {
-            statsController = gameObject.AddComponent<Stats>();
-        }
-        statsController.Initialize(characterConfig);
-    }
-
-    private void HandleMovement()
-    {
-        float moveInput = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(moveInput * characterConfig.moveSpeed, rb.velocity.y);
-
-        if (Input.GetButtonDown("Jump") && isGrounded)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        }
-
-        animator.SetFloat("Speed", Mathf.Abs(moveInput));
-    }
-
-    private void HandleAttacks()
-    {
-        if (Input.GetButtonDown("Fire1") && Time.time >= nextAttackTime)
-        {
-            animator.SetTrigger("Attack");
-            // Lógica de ataque aqui, usando statsController.AttackPower
-            nextAttackTime = Time.time + attackCooldown;
-        }
-    }
-
-    private void HandleSpells()
-    {
-        foreach (var spell in characterConfig.spells)
-        {
-            if (Input.GetKeyDown(spell.hotkey))
+            if (characterConfig != null)
             {
-                CastSpell(spell);
+                InitializeCharacter();
+            }
+            else
+            {
+                Debug.LogError("CharacterConfig is not assigned.");
             }
         }
-    }
 
-    private void CastSpell(Spell spell)
-    {
-        if (spell.usePrefab && spell.spellPrefab != null)
+        void Update()
         {
-            Instantiate(spell.spellPrefab, transform.position, Quaternion.identity);
-        }
-        else if (!spell.usePrefab && spell.spellSprite != null)
-        {
-            // Lógica para usar sprite em vez de prefab
+            HandleMovement();
+            HandleAttacks();
+            HandleSpells();
         }
 
-        Debug.Log($"{characterConfig.characterName} cast {spell.spellName}");
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
+        private void InitializeCharacter()
         {
-            isGrounded = true;
+            animator = GetComponent<Animator>();
+            if (animator == null)
+            {
+                animator = gameObject.AddComponent<Animator>();
+            }
+            animator.runtimeAnimatorController = characterConfig.animatorController;
+
+            rb = GetComponent<Rigidbody2D>();
+            if (rb == null)
+            {
+                rb = gameObject.AddComponent<Rigidbody2D>();
+            }
+
+            healthController = GetComponent<Health>();
+            if (healthController == null)
+            {
+                healthController = gameObject.AddComponent<Health>();
+            }
+            healthController.Initialize(characterConfig);
+
+            statsController = GetComponent<Stats>();
+            if (statsController == null)
+            {
+                statsController = gameObject.AddComponent<Stats>();
+            }
+            statsController.Initialize(characterConfig);
         }
-    }
 
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
+        private void HandleMovement()
         {
-            isGrounded = false;
+            float moveInput = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(moveInput * characterConfig.moveSpeed, rb.velocity.y);
+
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            }
+
+            animator.SetFloat("Speed", Mathf.Abs(moveInput));
+        }
+
+        private void HandleAttacks()
+        {
+            if (Input.GetButtonDown("Fire1") && Time.time >= nextAttackTime)
+            {
+                animator.SetTrigger("Attack");
+                // Lógica de ataque aqui, usando statsController.AttackPower
+                nextAttackTime = Time.time + attackCooldown;
+            }
+        }
+
+        private void HandleSpells()
+        {
+            foreach (var spell in characterConfig.spells)
+            {
+                if (Input.GetKeyDown(spell.hotkey))
+                {
+                    CastSpell(spell);
+                }
+            }
+        }
+
+        private void CastSpell(Spell spell)
+        {
+            if (spell.usePrefab && spell.spellPrefab != null)
+            {
+                Instantiate(spell.spellPrefab, transform.position, Quaternion.identity);
+            }
+            else if (!spell.usePrefab && spell.spellSprite != null)
+            {
+                // Lógica para usar sprite em vez de prefab
+            }
+
+            Debug.Log($"{characterConfig.characterName} cast {spell.spellName}");
+        }
+
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                isGrounded = true;
+            }
+        }
+
+        void OnCollisionExit2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                isGrounded = false;
+            }
         }
     }
 }

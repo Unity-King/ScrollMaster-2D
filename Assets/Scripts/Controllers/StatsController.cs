@@ -1,39 +1,65 @@
-using ScrollMaster2D.Config;
 using UnityEngine;
+using ScrollMaster2D.Config;
 
 namespace ScrollMaster2D.Controllers
 {
     public class Stats : MonoBehaviour
     {
         private Character characterConfig;
-        public float AttackPower { get; private set; }
-        public float Defense { get; private set; }
+
+        [SerializeField]
+        private float baseAttackPower;
+
+        [SerializeField]
+        private float baseDefense;
+
+        [SerializeField]
+        private float attackPowerPerLevel;
+
+        [SerializeField]
+        private float defensePerLevel;
+
+        [SerializeField]
+        private float attackPower;
+
+        [SerializeField]
+        private float defense;
+
+        public float AttackPower { get { return attackPower; } }
+        public float Defense { get { return defense; } }
 
         public void Initialize(Character config)
         {
             characterConfig = config;
-            AttackPower = characterConfig.attackPower;
-            Defense = characterConfig.defense;
+            baseAttackPower = characterConfig.attackPower;
+            baseDefense = characterConfig.defense;
+            UpdateStats();
+        }
+
+        public void UpdateStats()
+        {
+            attackPower = baseAttackPower + (characterConfig.level * attackPowerPerLevel);
+            defense = baseDefense + (characterConfig.level * defensePerLevel);
         }
 
         public void IncreaseAttackPower(float amount)
         {
-            AttackPower += amount;
+            attackPower += amount;
         }
 
         public void DecreaseAttackPower(float amount)
         {
-            AttackPower = Mathf.Max(0, AttackPower - amount);
+            attackPower = Mathf.Max(0, attackPower - amount);
         }
 
         public void IncreaseDefense(float amount)
         {
-            Defense += amount;
+            defense += amount;
         }
 
         public void DecreaseDefense(float amount)
         {
-            Defense = Mathf.Max(0, Defense - amount);
+            defense = Mathf.Max(0, defense - amount);
         }
     }
 }
