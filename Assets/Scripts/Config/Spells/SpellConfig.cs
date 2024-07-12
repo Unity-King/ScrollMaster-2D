@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ScrollMaster2D.Config.Spells
+namespace ScrollMaster2D.Config.Character
 {
     [CreateAssetMenu(fileName = "NewSpellConfig", menuName = "Configs/Character/Spell/New")]
     public class SpellConfig : ScriptableObject
