@@ -10,12 +10,18 @@ namespace ScrollMaster2D.Controllers
         public float jumpForce = 10f;
         public float attackCooldown = 0.5f;
 
+        [SerializeField]
+        private float currentSpeed;
+        [SerializeField]
+        private string currentAnimation;
+
         private AnimatorCharacter animatorController;
         private Rigidbody2D rb;
         private Health healthController;
         private Stats statsController;
         private float nextAttackTime = 0f;
         private bool isGrounded;
+        private bool isFacingRight = true;
 
         void Start()
         {
@@ -34,6 +40,7 @@ namespace ScrollMaster2D.Controllers
             HandleMovement();
             HandleAttacks();
             HandleSpells();
+            UpdateAnimator();
         }
 
         private void InitializeCharacter()
@@ -50,6 +57,10 @@ namespace ScrollMaster2D.Controllers
             {
                 rb = gameObject.AddComponent<Rigidbody2D>();
             }
+
+            // Configurar Rigidbody2D
+            rb.gravityScale = 3;
+            rb.freezeRotation = true;
 
             healthController = GetComponent<Health>();
             if (healthController == null)
@@ -69,14 +80,33 @@ namespace ScrollMaster2D.Controllers
         private void HandleMovement()
         {
             float moveInput = Input.GetAxis("Horizontal");
-            rb.velocity = new Vector2(moveInput * characterConfig.moveSpeed, rb.velocity.y);
+            currentSpeed = moveInput * characterConfig.moveSpeed;
+            rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
 
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             }
 
-            animatorController.SetFloat("Speed", Mathf.Abs(moveInput));
+            animatorController.SetFloat("Speed", Mathf.Abs(moveInput * characterConfig.moveSpeed));
+
+            // Virar o sprite baseado na direção do movimento
+            if (moveInput > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+            else if (moveInput < 0 && isFacingRight)
+            {
+                Flip();
+            }
+        }
+
+        private void Flip()
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
         }
 
         private void HandleAttacks()
@@ -112,6 +142,12 @@ namespace ScrollMaster2D.Controllers
             }
 
             Debug.Log($"{characterConfig.characterName} cast {spell.spellName}");
+        }
+
+        private void UpdateAnimator()
+        {
+            Animator animator = animatorController.GetComponent<Animator>();
+            currentAnimation = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
         }
 
         void OnCollisionEnter2D(Collision2D collision)
