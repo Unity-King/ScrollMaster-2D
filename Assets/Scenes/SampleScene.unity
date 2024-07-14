@@ -4986,12 +4986,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1964142025}
-  - component: {fileID: 1964142028}
   - component: {fileID: 1964142027}
-  - component: {fileID: 1964142026}
   - component: {fileID: 1964142031}
   - component: {fileID: 1964142030}
+  - component: {fileID: 1964142034}
   - component: {fileID: 1964142032}
+  - component: {fileID: 1964142028}
+  - component: {fileID: 1964142026}
   - component: {fileID: 1964142033}
   m_Layer: 0
   m_Name: Character
@@ -5057,6 +5058,18 @@ MonoBehaviour:
   characterConfig: {fileID: 11400000, guid: 24c4214820dfb4742a029b195134cacf, type: 2}
   jumpForce: 10
   attackCooldown: 0.5
+  currentSpeed: 0
+  currentAnimation: 
+  moveLeftKey: 97
+  moveRightKey: 100
+  jumpKey: 32
+  attackKey: 323
+  groundTag: Ground
+  enemyTag: Enemy
+  speedParameter: Speed
+  jumpParameter: isJumping
+  attackParameter: Attack
+  swordAttackParameter: isSword
 --- !u!212 &1964142028
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5154,7 +5167,7 @@ Animator:
   m_GameObject: {fileID: 1964142024}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 76964cb3f6bb9dd41b9a19765a02af37, type: 2}
+  m_Controller: {fileID: 9100000, guid: b2698ed8b9bcb374d86b041f32c48574, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5210,6 +5223,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.60054505, y: 1.5}
   m_EdgeRadius: 0
+--- !u!114 &1964142034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964142024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e4da40c8c79f94f9595402184edd60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2113368612
 GameObject:
   m_ObjectHideFlags: 0

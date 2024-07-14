@@ -15,6 +15,28 @@ namespace ScrollMaster2D.Controllers
         [SerializeField]
         private string currentAnimation;
 
+        [Header("Key Bindings")]
+        public KeyCode moveLeftKey = KeyCode.A;
+        public KeyCode moveRightKey = KeyCode.D;
+        public KeyCode jumpKey = KeyCode.Space;
+        public KeyCode attackKey = KeyCode.Mouse0;
+
+        [Header("Tags")]
+        [SerializeField]
+        private string groundTag = "Ground";
+        [SerializeField]
+        private string enemyTag = "Enemy";
+
+        [Header("Animator Parameters")]
+        [SerializeField]
+        private string speedParameter = "Speed";
+        [SerializeField]
+        private string jumpParameter = "isJumping";
+        [SerializeField]
+        private string attackParameter = "Attack";
+        [SerializeField]
+        private string swordAttackParameter = "isSword";
+
         private AnimatorCharacter animatorController;
         private Rigidbody2D rb;
         private Health healthController;
@@ -22,6 +44,7 @@ namespace ScrollMaster2D.Controllers
         private float nextAttackTime = 0f;
         private bool isGrounded;
         private bool isFacingRight = true;
+        private int attackCount = 0;
 
         void Start()
         {
@@ -51,7 +74,7 @@ namespace ScrollMaster2D.Controllers
                 animatorController = gameObject.AddComponent<AnimatorCharacter>();
             }
             animatorController.Initialize(characterConfig);
-
+            animatorController.GetComponent<Animator>().SetTrigger(attackParameter);
             rb = GetComponent<Rigidbody2D>();
             if (rb == null)
             {
@@ -79,16 +102,27 @@ namespace ScrollMaster2D.Controllers
 
         private void HandleMovement()
         {
-            float moveInput = Input.GetAxis("Horizontal");
+            float moveInput = 0f;
+            if (Input.GetKey(moveLeftKey))
+            {
+                moveInput = -1f;
+            }
+            else if (Input.GetKey(moveRightKey))
+            {
+                moveInput = 1f;
+            }
+
             currentSpeed = moveInput * characterConfig.moveSpeed;
             rb.velocity = new Vector2(currentSpeed, rb.velocity.y);
 
-            if (Input.GetButtonDown("Jump") && isGrounded)
+            if (Input.GetKeyDown(jumpKey) && isGrounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                animatorController.SetBool(jumpParameter, true);
+                isGrounded = false;
             }
 
-            animatorController.SetFloat("Speed", Mathf.Abs(moveInput * characterConfig.moveSpeed));
+            animatorController.SetFloat(speedParameter, Mathf.Abs(moveInput * characterConfig.moveSpeed));
 
             // Virar o sprite baseado na direção do movimento
             if (moveInput > 0 && !isFacingRight)
@@ -111,9 +145,11 @@ namespace ScrollMaster2D.Controllers
 
         private void HandleAttacks()
         {
-            if (Input.GetButtonDown("Fire1") && Time.time >= nextAttackTime)
+            if (Input.GetKeyDown(attackKey) && Time.time >= nextAttackTime)
             {
-                animatorController.SetTrigger("Attack");
+                animatorController.SetBool(swordAttackParameter, true);
+                animatorController.SetTrigger(attackParameter);
+                attackCount++;
                 // Lógica de ataque aqui, usando statsController.AttackPower
                 nextAttackTime = Time.time + attackCooldown;
             }
@@ -148,19 +184,29 @@ namespace ScrollMaster2D.Controllers
         {
             Animator animator = animatorController.GetComponent<Animator>();
             currentAnimation = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            {
+                attackCount--;
+                if (attackCount <= 0)
+                {
+                    animatorController.SetBool(swordAttackParameter, false);
+                }
+            }
         }
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Ground"))
+            if (collision.gameObject.CompareTag(groundTag))
             {
                 isGrounded = true;
+                animatorController.SetBool(jumpParameter, false);
             }
         }
 
         void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag("Ground"))
+            if (collision.gameObject.CompareTag(groundTag))
             {
                 isGrounded = false;
             }

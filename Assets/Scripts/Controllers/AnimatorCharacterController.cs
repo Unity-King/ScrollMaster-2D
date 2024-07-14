@@ -34,5 +34,13 @@ namespace ScrollMaster2D.Controllers
                 animator.SetTrigger(parameterName);
             }
         }
+
+        public void SetBool(string parameterName, bool value)
+        {
+            if (animator != null)
+            {
+                animator.SetBool(parameterName, value);
+            }
+        }
     }
 }

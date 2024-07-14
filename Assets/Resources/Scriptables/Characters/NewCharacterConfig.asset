@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ee64e92ad53994db31eda8812a9eea, type: 3}
   m_Name: NewCharacterConfig
   m_EditorClassIdentifier: 
-  characterName: Default
+  characterName: Igi The Mage
   level: 1
   maxHealth: 100
   attackPower: 10
