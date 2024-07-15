@@ -41,6 +41,7 @@ namespace ScrollMaster2D.Controllers
         private Rigidbody2D rb;
         private Health healthController;
         private Stats statsController;
+        private ExpController expController;
         private float nextAttackTime = 0f;
         private bool isGrounded;
         private bool isFacingRight = true;
@@ -74,7 +75,7 @@ namespace ScrollMaster2D.Controllers
                 animatorController = gameObject.AddComponent<AnimatorCharacter>();
             }
             animatorController.Initialize(characterConfig);
-            animatorController.GetComponent<Animator>().SetTrigger(attackParameter);
+
             rb = GetComponent<Rigidbody2D>();
             if (rb == null)
             {
@@ -98,6 +99,13 @@ namespace ScrollMaster2D.Controllers
                 statsController = gameObject.AddComponent<Stats>();
             }
             statsController.Initialize(characterConfig);
+
+            expController = GetComponent<ExpController>();
+            if (expController == null)
+            {
+                expController = gameObject.AddComponent<ExpController>();
+            }
+            expController.characterConfig = characterConfig;
         }
 
         private void HandleMovement()
@@ -122,7 +130,13 @@ namespace ScrollMaster2D.Controllers
                 isGrounded = false;
             }
 
-            animatorController.SetFloat(speedParameter, Mathf.Abs(moveInput * characterConfig.moveSpeed));
+            if (rb.velocity.y == 0 && !isGrounded)
+            {
+                animatorController.SetBool(jumpParameter, false);
+                isGrounded = true;
+            }
+
+            animatorController.SetFloat(speedParameter, Mathf.Abs(currentSpeed));
 
             // Virar o sprite baseado na direção do movimento
             if (moveInput > 0 && !isFacingRight)
