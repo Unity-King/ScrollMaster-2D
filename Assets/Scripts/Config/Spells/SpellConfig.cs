@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ScrollMaster2D.Config
 {
-    [CreateAssetMenu(fileName = "NewSpellConfig", menuName = "Configs/Character/Spell/New")]
+    [CreateAssetMenu(fileName = "NewSpellConfig", menuName = "ScrollMaster2D/Configs/Character/Spell/New")]
     public class Spell : ScriptableObject
     {
         [Header("Informações Básicas")]

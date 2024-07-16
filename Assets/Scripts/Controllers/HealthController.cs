@@ -22,13 +22,16 @@ namespace ScrollMaster2D.Controllers
         [SerializeField]
         private float maxHealth;
 
+        private void Update()
+        {
+            healthBar.SetHealth(currentHealth);
+        }
         public void Initialize(Character config)
         {
             characterConfig = config;
             baseMaxHealth = characterConfig.maxHealth;
             UpdateHealth();
         }
-
         public void UpdateHealth()
         {
             maxHealth = baseMaxHealth + (characterConfig.level * healthPerLevel);
@@ -38,7 +41,6 @@ namespace ScrollMaster2D.Controllers
             Debug.Log("Teste Update Health Function Current Health : " + currentHealth);
 
         }
-
         public void TakeDamage(float damage)
         {
             float effectiveDamage = damage - characterConfig.defense;
@@ -51,7 +53,6 @@ namespace ScrollMaster2D.Controllers
                 Die();
             }
         }
-
         public void Heal(float amount)
         {
             currentHealth += amount;
@@ -60,11 +61,9 @@ namespace ScrollMaster2D.Controllers
                 currentHealth = maxHealth;
             }
         }
-
         private void Die()
         {
             Debug.Log($"{characterConfig.characterName} has died.");
-            // Adicionar lógica de morte aqui, como animações ou reiniciar o nível
         }
     }
 }

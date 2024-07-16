@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ScrollMaster2D.Config
 {
-    [CreateAssetMenu(fileName = "NewCharacterConfig", menuName = "Configs/Character/New")]
+    [CreateAssetMenu(fileName = "NewCharacterConfig", menuName = "ScrollMaster2D/Configs/Character/New")]
     public class Character : ScriptableObject
     {
         [Header("Informações Básicas")]
@@ -14,6 +14,7 @@ namespace ScrollMaster2D.Config
         public float attackPower = 10f;
         public float defense = 5f;
         public float moveSpeed = 5f;
+        public int inventorySlots = 20;
 
         [Header("Habilidades")]
         public Spell[] spells;

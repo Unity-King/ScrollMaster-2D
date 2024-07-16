@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: DefaultLandscapeConfig1
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultLandscapeConfig1
+  mapWidth: 50
+  mapHeight: 10
+  grassHeight: 3
+  grassTile: {fileID: 11400000, guid: d9496abe80e25384483d1a40bf38e1f2, type: 2}
+  highAreaPositions:
+  - {x: 10, y: 4}
+  - {x: 11, y: 4}
+  - {x: 12, y: 4}
+  - {x: 20, y: 5}
+  - {x: 21, y: 5}
+  enemyAreaPositions:
+  - {x: 30, y: 3}
+  - {x: 31, y: 3}
+  - {x: 32, y: 3}
+  terrainFeatures:
+  - startPosition: {x: 15, y: 5}
+    shape:
+    - {x: 0, y: 0}
+    - {x: 1, y: 1}
+    - {x: 2, y: 2}
+    - {x: 3, y: 3}
+    - {x: 4, y: 4}
+    - {x: 5, y: 5}
+    tile: {fileID: 11400000, guid: d9496abe80e25384483d1a40bf38e1f2, type: 2}

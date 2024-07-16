@@ -39,14 +39,13 @@ namespace ScrollMaster2D.Controllers
 
         private AnimatorCharacter animatorController;
         private Rigidbody2D rb;
-        private Health healthController;
-        private Stats statsController;
-        private ExpController expController;
+        public Health healthController;
+        public Stats statsController;
+        public Exp expController;
         private float nextAttackTime = 0f;
         private bool isGrounded;
         private bool isFacingRight = true;
         private int attackCount = 0;
-
         void Start()
         {
             if (characterConfig != null)
@@ -58,7 +57,6 @@ namespace ScrollMaster2D.Controllers
                 Debug.LogError("CharacterConfig is not assigned.");
             }
         }
-
         void Update()
         {
             HandleMovement();
@@ -82,7 +80,6 @@ namespace ScrollMaster2D.Controllers
                 rb = gameObject.AddComponent<Rigidbody2D>();
             }
 
-            // Configurar Rigidbody2D
             rb.gravityScale = 3;
             rb.freezeRotation = true;
 
@@ -100,12 +97,11 @@ namespace ScrollMaster2D.Controllers
             }
             statsController.Initialize(characterConfig);
 
-            expController = GetComponent<ExpController>();
+            expController = GetComponent<Exp>();
             if (expController == null)
             {
-                expController = gameObject.AddComponent<ExpController>();
+                expController = gameObject.AddComponent<Exp>();
             }
-            expController.characterConfig = characterConfig;
         }
 
         private void HandleMovement()
@@ -138,7 +134,6 @@ namespace ScrollMaster2D.Controllers
 
             animatorController.SetFloat(speedParameter, Mathf.Abs(currentSpeed));
 
-            // Virar o sprite baseado na direção do movimento
             if (moveInput > 0 && !isFacingRight)
             {
                 Flip();
@@ -164,11 +159,9 @@ namespace ScrollMaster2D.Controllers
                 animatorController.SetBool(swordAttackParameter, true);
                 animatorController.SetTrigger(attackParameter);
                 attackCount++;
-                // Lógica de ataque aqui, usando statsController.AttackPower
                 nextAttackTime = Time.time + attackCooldown;
             }
         }
-
         private void HandleSpells()
         {
             foreach (var spell in characterConfig.spells)
@@ -179,7 +172,6 @@ namespace ScrollMaster2D.Controllers
                 }
             }
         }
-
         private void CastSpell(Spell spell)
         {
             if (spell.usePrefab && spell.spellPrefab != null)
@@ -193,7 +185,6 @@ namespace ScrollMaster2D.Controllers
 
             Debug.Log($"{characterConfig.characterName} cast {spell.spellName}");
         }
-
         private void UpdateAnimator()
         {
             Animator animator = animatorController.GetComponent<Animator>();
@@ -208,7 +199,6 @@ namespace ScrollMaster2D.Controllers
                 }
             }
         }
-
         void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag(groundTag))
@@ -217,7 +207,6 @@ namespace ScrollMaster2D.Controllers
                 animatorController.SetBool(jumpParameter, false);
             }
         }
-
         void OnCollisionExit2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag(groundTag))
