@@ -7,11 +7,11 @@ namespace ScrollMaster2D.Controllers
 {
     public class TreeController : MonoBehaviour
     {
-        public TreeConfig treeConfig; // Configuração da árvore
-        public KeyCode collectKey = KeyCode.E; // Tecla para coletar recursos
-        public float interactionRange = 2.0f; // Alcance de interação configurável
-        public float bounceDuration = 0.2f; // Duração do efeito de bounce
-        public float bounceScale = 1.2f; // Escala do efeito de bounce
+        public TreeConfig treeConfig; 
+        public KeyCode collectKey = KeyCode.E; 
+        public float interactionRange = 2.0f; 
+        public float bounceDuration = 0.2f; 
+        public float bounceScale = 1.2f; 
 
         public int currentHealth;
         private Transform playerTransform;
@@ -25,11 +25,10 @@ namespace ScrollMaster2D.Controllers
                 currentHealth = treeConfig.treeHealth;
             }
 
-            // Localizar o botão de coleta pela tag
             collectButton = GameObject.FindWithTag("CollectButton");
             if (collectButton != null)
             {
-                collectButton.SetActive(false); // Esconde o botão de coleta inicialmente
+                collectButton.SetActive(false);
             }
             else
             {
@@ -55,13 +54,13 @@ namespace ScrollMaster2D.Controllers
             if (playerTransform != null)
             {
                 float distance = Vector3.Distance(transform.position, playerTransform.position);
-                Debug.Log($"Distance to player: {distance}"); // Log the distance for debugging
+                Debug.Log($"Distance to player: {distance}"); 
 
                 if (distance <= interactionRange)
                 {
                     if (collectButton != null && !collectButton.activeSelf)
                     {
-                        collectButton.SetActive(true); // Mostra o botão de coleta quando o jogador está perto
+                        collectButton.SetActive(true); 
                         Debug.Log("Player in range, showing collect button");
                     }
 
@@ -74,7 +73,7 @@ namespace ScrollMaster2D.Controllers
                 {
                     if (collectButton != null && collectButton.activeSelf)
                     {
-                        collectButton.SetActive(false); // Esconde o botão de coleta quando o jogador sai de perto
+                        collectButton.SetActive(false); 
                         Debug.Log("Player out of range, hiding collect button");
                     }
                 }
@@ -97,7 +96,7 @@ namespace ScrollMaster2D.Controllers
 
                 if (currentHealth <= 0)
                 {
-                    Destroy(gameObject); // Destroi a árvore quando sua vida chega a zero
+                    Destroy(gameObject); 
                 }
             }
             else
@@ -156,7 +155,6 @@ namespace ScrollMaster2D.Controllers
             }
         }
 
-        // Método para desenhar o Gizmo no Editor
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;

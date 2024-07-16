@@ -1,25 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor; // Adicionar para usar EditorUtility
+using UnityEditor; 
 using ScrollMaster2D.Config;
 
 namespace ScrollMaster2D.Controllers
 {
     public class InventoryController : MonoBehaviour
     {
-        public Character characterConfig; // Configuração do personagem
+        public Character characterConfig; 
         [SerializeField] public List<InventoryItem> inventoryItems = new List<InventoryItem>();
 
         private Dictionary<string, int> itemCounts = new Dictionary<string, int>();
-        private Dictionary<string, int> previousItemCounts = new Dictionary<string, int>(); // Para monitorar mudanças
+        private Dictionary<string, int> previousItemCounts = new Dictionary<string, int>();
 
         void Update()
         {
             if (HasInventoryChanged())
             {
                 UpdateInventoryItems();
-                EditorUtility.SetDirty(this); // Notificar o Unity sobre mudanças
+                EditorUtility.SetDirty(this);
             }
         }
 
@@ -35,7 +35,7 @@ namespace ScrollMaster2D.Controllers
             }
 
             UpdateInventoryItems();
-            EditorUtility.SetDirty(this); // Notificar o Unity sobre mudanças
+            EditorUtility.SetDirty(this); 
         }
 
         public int GetItemCount(string itemName)
@@ -45,7 +45,6 @@ namespace ScrollMaster2D.Controllers
 
         private bool HasInventoryChanged()
         {
-            // Verifica se houve mudanças no inventário
             if (previousItemCounts.Count != itemCounts.Count)
             {
                 return true;
@@ -78,7 +77,6 @@ namespace ScrollMaster2D.Controllers
                 }
             }
 
-            // Atualiza o estado anterior
             previousItemCounts = new Dictionary<string, int>(itemCounts);
         }
     }
@@ -90,7 +88,6 @@ namespace ScrollMaster2D.Controllers
         public int quantity;
     }
 
-    // Classe de banco de dados de itens para obter as configurações dos itens
     public static class ItemDatabase
     {
         private static Dictionary<string, ItemConfig> itemConfigs = new Dictionary<string, ItemConfig>();

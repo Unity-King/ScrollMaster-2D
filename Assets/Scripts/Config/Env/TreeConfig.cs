@@ -9,8 +9,8 @@ namespace ScrollMaster2D.Config
         public float heightOffset;
         public float topColliderOffset;
         public int treeHealth;
-        public ItemConfig woodItem; // Item de madeira
-        public ItemConfig stickItem; // Item de graveto
+        public ItemConfig woodItem; 
+        public ItemConfig stickItem;
         public int woodAmount;
         public int stickAmount;
     }

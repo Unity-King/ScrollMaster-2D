@@ -15,5 +15,5 @@ public class ItemConfig : ScriptableObject
     public string itemName;
     public GameObject itemPrefab;
     public int quantity;
-    public ItemCategory category; // Categoria do item
+    public ItemCategory category; 
 }
