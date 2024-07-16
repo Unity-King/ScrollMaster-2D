@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
-using ScrollMaster2D.Controllers;
 using System.Linq;
+using ScrollMaster2D.Controllers;
 
 [CustomEditor(typeof(InventoryController))]
 public class InventoryControllerEditor : Editor

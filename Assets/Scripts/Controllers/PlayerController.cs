@@ -1,6 +1,7 @@
 using UnityEngine;
 using ScrollMaster2D.Config;
 using ScrollMaster2D.Controllers;
+using System.Collections;
 
 namespace ScrollMaster2D.Controllers
 {
@@ -9,6 +10,8 @@ namespace ScrollMaster2D.Controllers
         public Character characterConfig;
         public float jumpForce = 10f;
         public float attackCooldown = 0.5f;
+        public GameObject sword; // Referência ao objeto da espada
+        public Collider2D swordCollider; // Referência ao Collider da espada
 
         [SerializeField]
         private float currentSpeed;
@@ -40,12 +43,13 @@ namespace ScrollMaster2D.Controllers
         private AnimatorCharacter animatorController;
         private Rigidbody2D rb;
         public Health healthController;
-        public Stats statsController;
+        public Stats statsController; // Referência ao Stats
         public Exp expController;
         private float nextAttackTime = 0f;
         private bool isGrounded;
         private bool isFacingRight = true;
         private int attackCount = 0;
+
         void Start()
         {
             if (characterConfig != null)
@@ -56,7 +60,13 @@ namespace ScrollMaster2D.Controllers
             {
                 Debug.LogError("CharacterConfig is not assigned.");
             }
+
+            if (swordCollider != null)
+            {
+                swordCollider.enabled = false; // Desativa o Collider da espada inicialmente
+            }
         }
+
         void Update()
         {
             HandleMovement();
@@ -157,11 +167,20 @@ namespace ScrollMaster2D.Controllers
             if (Input.GetKeyDown(attackKey) && Time.time >= nextAttackTime)
             {
                 animatorController.SetBool(swordAttackParameter, true);
-                animatorController.SetTrigger(attackParameter);
+                //animatorController.SetTrigger(attackParameter);
                 attackCount++;
                 nextAttackTime = Time.time + attackCooldown;
+                StartCoroutine(PerformSwordAttack());
             }
         }
+
+        private IEnumerator PerformSwordAttack()
+        {
+            swordCollider.enabled = true; // Ativa o Collider da espada
+            yield return new WaitForSeconds(0.5f); // Duração da animação de ataque
+            swordCollider.enabled = false; // Desativa o Collider da espada
+        }
+
         private void HandleSpells()
         {
             foreach (var spell in characterConfig.spells)
@@ -172,6 +191,7 @@ namespace ScrollMaster2D.Controllers
                 }
             }
         }
+
         private void CastSpell(Spell spell)
         {
             if (spell.usePrefab && spell.spellPrefab != null)
@@ -185,6 +205,7 @@ namespace ScrollMaster2D.Controllers
 
             Debug.Log($"{characterConfig.characterName} cast {spell.spellName}");
         }
+
         private void UpdateAnimator()
         {
             Animator animator = animatorController.GetComponent<Animator>();
@@ -199,6 +220,7 @@ namespace ScrollMaster2D.Controllers
                 }
             }
         }
+
         void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag(groundTag))
@@ -207,11 +229,26 @@ namespace ScrollMaster2D.Controllers
                 animatorController.SetBool(jumpParameter, false);
             }
         }
+
         void OnCollisionExit2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag(groundTag))
             {
                 isGrounded = false;
+            }
+        }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Enemy") && swordCollider.enabled)
+            {
+                EnemyController enemyController = other.GetComponent<EnemyController>();
+                if (enemyController != null)
+                {
+                    int damage = Mathf.RoundToInt(statsController.AttackPower); // Converta para int
+                    enemyController.TakeDamage(damage);
+                    Debug.Log($"{other.gameObject.name} hit by player for {damage} damage.");
+                }
             }
         }
     }

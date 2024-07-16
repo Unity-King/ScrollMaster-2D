@@ -8,6 +8,7 @@ TagManager:
   - Tree
   - CollectButton
   - ItemPickUp
+  - Enemy
   layers:
   - Default
   - TransparentFX
