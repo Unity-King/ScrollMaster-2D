@@ -14,8 +14,7 @@ namespace ScrollMaster2D.Controllers
 
         void Start()
         {
-            currentHealth = maxHealth;
-            UpdateHealthBar();
+            Initialize(enemyConfig.maxHealth);
             expController = GetComponent<EnemyExpController>();
         }
 

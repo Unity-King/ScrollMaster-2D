@@ -7,8 +7,7 @@ namespace ScrollMaster2D.Controllers
     {
         public EnemyConfig enemyConfig;
         public Transform player; // Referência ao jogador
-        public float attackRange = 1.5f;
-        public float attackCooldown = 1f;
+        private bool hasBeenAttacked = false;
 
         [SerializeField]
         private float currentSpeed;
@@ -18,8 +17,6 @@ namespace ScrollMaster2D.Controllers
         [Header("Animator Parameters")]
         [SerializeField]
         private string speedParameter = "Speed";
-        [SerializeField]
-        private string isAttackingParameter = "isAttacking";
 
         private Animator animator;
         private Rigidbody2D rb;
@@ -47,7 +44,7 @@ namespace ScrollMaster2D.Controllers
             {
                 HandleMovement();
                 HandleAttacks();
-                LogCurrentAnimation(); // Adicionar para logar a animação atual
+                LogCurrentAnimation();
             }
         }
 
@@ -75,29 +72,63 @@ namespace ScrollMaster2D.Controllers
         private void HandleMovement()
         {
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-            if (distanceToPlayer > attackRange)
+
+            if (enemyConfig.combatType == CombatType.Passive)
+            {
+                if (hasBeenAttacked || distanceToPlayer <= enemyConfig.detectionRange)
+                {
+                    MoveTowardsPlayer();
+                }
+                else
+                {
+                    Patrol();
+                }
+            }
+            else if (enemyConfig.combatType == CombatType.Aggressive)
+            {
+                if (distanceToPlayer <= enemyConfig.detectionRange)
+                {
+                    MoveTowardsPlayer();
+                }
+                else
+                {
+                    Patrol();
+                }
+            }
+
+            animator.SetFloat(speedParameter, Mathf.Abs(rb.velocity.x));
+        }
+
+        private void Patrol()
+        {
+            // Lógica de patrulha básica: andar de um lado para o outro
+            currentSpeed = enemyConfig.moveSpeed / 2;
+            rb.velocity = new Vector2(currentSpeed * (isFacingRight ? 1 : -1), rb.velocity.y);
+        }
+
+        private void MoveTowardsPlayer()
+        {
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+            if (distanceToPlayer <= enemyConfig.followRange)
             {
                 currentSpeed = enemyConfig.moveSpeed;
                 Vector2 direction = (player.position - transform.position).normalized;
                 rb.velocity = new Vector2(direction.x * currentSpeed, rb.velocity.y);
 
-                animator.SetBool(isAttackingParameter, false);
-
-                if (direction.x < 0 && !isFacingRight)
+                if (direction.x > 0 && !isFacingRight)
                 {
                     Flip();
                 }
-                else if (direction.x > 0 && isFacingRight)
+                else if (direction.x < 0 && isFacingRight)
                 {
                     Flip();
                 }
             }
             else
             {
-                rb.velocity = new Vector2(0, rb.velocity.y);
+                rb.velocity = Vector2.zero;
             }
-
-            animator.SetFloat(speedParameter, Mathf.Abs(rb.velocity.x));
         }
 
         private void Flip()
@@ -113,21 +144,27 @@ namespace ScrollMaster2D.Controllers
         private void HandleAttacks()
         {
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-            if (distanceToPlayer <= attackRange && Time.time >= nextAttackTime)
+            if (distanceToPlayer <= enemyConfig.detectionRange && Time.time >= nextAttackTime)
             {
-                animator.SetBool(isAttackingParameter, true);
-                nextAttackTime = Time.time + attackCooldown;
+                animator.SetBool(enemyConfig.attackAnimationName, true);
+                nextAttackTime = Time.time + enemyConfig.attackCooldown;
             }
             else
             {
-                animator.SetBool(isAttackingParameter, false);
+                animator.SetBool(enemyConfig.attackAnimationName, false);
             }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            healthController.TakeDamage(damage);
+            hasBeenAttacked = true;
         }
 
         public void DealDamage() // Chamado pelo evento de animação
         {
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-            if (distanceToPlayer <= attackRange)
+            if (distanceToPlayer <= enemyConfig.detectionRange)
             {
                 Health playerHealth = player.GetComponent<Health>();
                 if (playerHealth != null)
@@ -146,9 +183,12 @@ namespace ScrollMaster2D.Controllers
             }
         }
 
-        public void TakeDamage(int damage)
+        private void OnDrawGizmosSelected()
         {
-            healthController.TakeDamage(damage);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, enemyConfig.detectionRange);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, enemyConfig.followRange);
         }
     }
 }
