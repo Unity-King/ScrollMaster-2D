@@ -4,8 +4,9 @@ public enum ItemCategory
 {
     Wood,
     Stick,
-    Food,
+    Foods,
     Tools,
+    Golds,
     Other
 }
 

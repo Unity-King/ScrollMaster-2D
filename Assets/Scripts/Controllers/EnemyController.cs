@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using ScrollMaster2D.Config;
 
@@ -6,7 +7,7 @@ namespace ScrollMaster2D.Controllers
     public class EnemyController : MonoBehaviour
     {
         public EnemyConfig enemyConfig;
-        public Transform player; // Referência ao jogador
+        public Transform player;
         private bool hasBeenAttacked = false;
 
         [SerializeField]
@@ -17,12 +18,33 @@ namespace ScrollMaster2D.Controllers
         [Header("Animator Parameters")]
         [SerializeField]
         private string speedParameter = "Speed";
+        [SerializeField]
+        private string attackParameter = "isAttacking";
 
         private Animator animator;
         private Rigidbody2D rb;
         private EnemyHealthController healthController;
         private float nextAttackTime = 0f;
         private bool isFacingRight = true;
+        private bool isGrounded = false;
+
+        [Header("Ground Check")]
+        [SerializeField]
+        private Transform groundCheck;
+        [SerializeField]
+        private float groundCheckRadius = 0.2f;
+        [SerializeField]
+        private LayerMask groundLayer;
+
+        [Header("Obstacle Check")]
+        [SerializeField]
+        private Transform obstacleCheck;
+        [SerializeField]
+        private float obstacleCheckDistance = 0.5f;
+        [SerializeField]
+        private LayerMask obstacleLayer;
+
+        private bool isSpecialAttackReady = false;
 
         void Start()
         {
@@ -48,6 +70,11 @@ namespace ScrollMaster2D.Controllers
             }
         }
 
+        private void FixedUpdate()
+        {
+            CheckGround();
+        }
+
         private void InitializeEnemy()
         {
             animator = GetComponent<Animator>();
@@ -67,6 +94,11 @@ namespace ScrollMaster2D.Controllers
                 healthController = gameObject.AddComponent<EnemyHealthController>();
             }
             healthController.Initialize(enemyConfig.maxHealth);
+        }
+
+        private void CheckGround()
+        {
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
         }
 
         private void HandleMovement()
@@ -101,9 +133,13 @@ namespace ScrollMaster2D.Controllers
 
         private void Patrol()
         {
-            // Lógica de patrulha básica: andar de um lado para o outro
             currentSpeed = enemyConfig.moveSpeed / 2;
             rb.velocity = new Vector2(currentSpeed * (isFacingRight ? 1 : -1), rb.velocity.y);
+
+            if (IsObstacleInFront())
+            {
+                Flip();
+            }
         }
 
         private void MoveTowardsPlayer()
@@ -116,13 +152,18 @@ namespace ScrollMaster2D.Controllers
                 Vector2 direction = (player.position - transform.position).normalized;
                 rb.velocity = new Vector2(direction.x * currentSpeed, rb.velocity.y);
 
-                if (direction.x > 0 && !isFacingRight)
+                if (direction.x < 0 && !isFacingRight)
                 {
                     Flip();
                 }
-                else if (direction.x < 0 && isFacingRight)
+                else if (direction.x > 0 && isFacingRight)
                 {
                     Flip();
+                }
+
+                if (isGrounded && IsObstacleInFront())
+                {
+                    Jump();
                 }
             }
             else
@@ -131,11 +172,16 @@ namespace ScrollMaster2D.Controllers
             }
         }
 
+        private void Jump()
+        {
+            rb.velocity = new Vector2(rb.velocity.x, enemyConfig.jumpForce);
+        }
+
         private void Flip()
         {
             isFacingRight = !isFacingRight;
             Vector3 theScale = transform.localScale;
-            theScale.x = isFacingRight ? Mathf.Abs(theScale.x) : -Mathf.Abs(theScale.x);
+            theScale.x *= -1;
             transform.localScale = theScale;
 
             Debug.Log("Flipping. isFacingRight: " + isFacingRight);
@@ -146,13 +192,45 @@ namespace ScrollMaster2D.Controllers
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
             if (distanceToPlayer <= enemyConfig.detectionRange && Time.time >= nextAttackTime)
             {
-                animator.SetBool(enemyConfig.attackAnimationName, true);
+                if (Random.value <= enemyConfig.specialAttackChance)
+                {
+                    isSpecialAttackReady = true;
+                }
+
+                Debug.Log($"{enemyConfig.enemyName} is preparing to attack!");
+
+                StartCoroutine(PerformAttack());
                 nextAttackTime = Time.time + enemyConfig.attackCooldown;
             }
-            else
+        }
+
+        private IEnumerator PerformAttack()
+        {
+            animator.SetBool(attackParameter, true);
+
+            yield return null;
+
+            float attackAnimationDuration = animator.GetCurrentAnimatorClipInfo(0).Length > 0 ? animator.GetCurrentAnimatorClipInfo(0)[0].clip.length : 1f;
+            float teleportTime = attackAnimationDuration * enemyConfig.teleportAnimationThreshold;
+
+            yield return new WaitForSeconds(attackAnimationDuration * enemyConfig.teleportAnimationThreshold);
+
+            if (isSpecialAttackReady)
             {
-                animator.SetBool(enemyConfig.attackAnimationName, false);
+                TeleportToPlayer();
+                isSpecialAttackReady = false;
             }
+
+            yield return new WaitForSeconds(attackAnimationDuration * (1 - enemyConfig.teleportAnimationThreshold));
+            animator.SetBool(attackParameter, false);
+        }
+
+        private void TeleportToPlayer()
+        {
+            Vector2 direction = (player.position - transform.position).normalized;
+            Vector2 newPosition = (Vector2)player.position - direction * 2f;
+            transform.position = newPosition;
+            Debug.Log($"Teleported {transform.name} to {newPosition}");
         }
 
         public void TakeDamage(int damage)
@@ -161,7 +239,7 @@ namespace ScrollMaster2D.Controllers
             hasBeenAttacked = true;
         }
 
-        public void DealDamage() // Chamado pelo evento de animação
+        public void DealDamage()
         {
             float distanceToPlayer = Vector2.Distance(transform.position, player.position);
             if (distanceToPlayer <= enemyConfig.detectionRange)
@@ -189,6 +267,23 @@ namespace ScrollMaster2D.Controllers
             Gizmos.DrawWireSphere(transform.position, enemyConfig.detectionRange);
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, enemyConfig.followRange);
+            Gizmos.color = Color.green;
+            Gizmos.DrawRay(obstacleCheck.position, (isFacingRight ? Vector2.right : Vector2.left) * obstacleCheckDistance);
+        }
+
+        private bool IsObstacleInFront()
+        {
+            RaycastHit2D hit = Physics2D.Raycast(obstacleCheck.position, isFacingRight ? Vector2.right : Vector2.left, obstacleCheckDistance, obstacleLayer);
+            return hit.collider != null;
+        }
+
+        private void OnDestroy()
+        {
+            EnemyLootController lootController = GetComponent<EnemyLootController>();
+            if (lootController != null)
+            {
+                lootController.DropLoot(enemyConfig);
+            }
         }
     }
 }

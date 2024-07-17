@@ -101,13 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treeConfig: {fileID: 11400000, guid: d2b3230b09a53dc4b8594da865ba8b47, type: 2}
   collectKey: 101
-  collectButton: {fileID: 3588085779589846196, guid: e78d82a095c9c5d47a5c09e57ec31c67,
-    type: 3}
-  interactionRange: 10
+  interactionRange: 1.5
+  bounceDuration: 0.2
+  bounceScale: 1.2
   currentHealth: 0
-  playerTransform: {fileID: 7987259054817556072, guid: 93dffdb117f9dab4d86bd09718181114,
-    type: 3}
-  playerInRange: 0
 --- !u!61 &3177242838445594696
 BoxCollider2D:
   m_ObjectHideFlags: 0

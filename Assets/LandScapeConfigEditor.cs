@@ -1,40 +1,18 @@
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
+using ScrollMaster2D.Controllers;
 
-[CustomEditor(typeof(ScrollMaster2D.Config.LandscapeConfig))]
-public class LandscapeConfigEditor : Editor
+[CustomEditor(typeof(TerrainController))]
+public class TerrainControllerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
-        ScrollMaster2D.Config.LandscapeConfig config = (ScrollMaster2D.Config.LandscapeConfig)target;
-
-        if (GUILayout.Button("Add Terrain Feature"))
+        TerrainController terrainController = (TerrainController)target;
+        if (GUILayout.Button("Regenerate Terrain"))
         {
-            AddTerrainFeature(config);
+            terrainController.RegenerateTerrain();
         }
-
-        EditorGUILayout.Space();
-
-        foreach (var feature in config.terrainFeatures)
-        {
-            EditorGUILayout.LabelField("Feature at (" + feature.startPosition.x + ", " + feature.startPosition.y + ")");
-            foreach (var pos in feature.shape)
-            {
-                EditorGUILayout.LabelField("  Offset: (" + pos.x + ", " + pos.y + ")");
-            }
-        }
-    }
-
-    private void AddTerrainFeature(ScrollMaster2D.Config.LandscapeConfig config)
-    {
-        ArrayUtility.Add(ref config.terrainFeatures, new ScrollMaster2D.Config.LandscapeConfig.TerrainFeature
-        {
-            startPosition = Vector2Int.zero,
-            shape = new Vector2Int[0],
-            tile = null
-        });
     }
 }
-

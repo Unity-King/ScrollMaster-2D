@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 2540199238673593009}
   - component: {fileID: 3312662255405041379}
   - component: {fileID: 390105032802126483}
+  - component: {fileID: 4004115428542690808}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -138,6 +139,7 @@ MonoBehaviour:
   characterConfig: {fileID: 11400000, guid: 24c4214820dfb4742a029b195134cacf, type: 2}
   jumpForce: 10
   attackCooldown: 0.5
+  sword: {fileID: 0}
   swordCollider: {fileID: 5448378273649870956}
   currentSpeed: 0
   currentAnimation: 
@@ -362,3 +364,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.60054505, y: 1.5}
   m_EdgeRadius: 0
+--- !u!114 &4004115428542690808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7077786655371372199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73752e69b92c86a4ca2fe57e5d3ecc61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miningConfig: {fileID: 11400000, guid: 8d1fd6cd3aa45d34c857162b58103d11, type: 2}
+  mainCamera: {fileID: 0}
+  tilemap: {fileID: 0}

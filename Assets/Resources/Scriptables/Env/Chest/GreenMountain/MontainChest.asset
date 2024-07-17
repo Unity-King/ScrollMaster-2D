@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5cb12597910d44da318796626d2f8a, type: 3}
+  m_Name: MontainChest
+  m_EditorClassIdentifier: 
+  chestName: Mountain Chest
+  lootItems:
+  - {fileID: 11400000, guid: 29bd813539383374480e605c67c78d73, type: 2}
+  expAmount: 10
+  spawnableMonster: {fileID: 11400000, guid: 6b1abd55cf79a254ca97dc8f36325d82, type: 2}
+  canSpawnMonster: 0

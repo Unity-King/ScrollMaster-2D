@@ -1,22 +1,25 @@
 using UnityEngine;
-using UnityEngine.UI;
-using ScrollMaster2D.Config;
+using System;
 using System.Collections;
+using ScrollMaster2D.Config;
 
 namespace ScrollMaster2D.Controllers
 {
     public class TreeController : MonoBehaviour
     {
-        public TreeConfig treeConfig; 
-        public KeyCode collectKey = KeyCode.E; 
-        public float interactionRange = 2.0f; 
-        public float bounceDuration = 0.2f; 
-        public float bounceScale = 1.2f; 
+        public TreeConfig treeConfig;
+        public KeyCode collectKey = KeyCode.E;
+        public float interactionRange = 2.0f;
+        public float bounceDuration = 0.2f;
+        public float bounceScale = 1.2f;
 
         public int currentHealth;
         private Transform playerTransform;
-        private GameObject collectButton;
+        private static TreeController currentInteractableTree;
         private Vector3 originalScale;
+
+        public static event Action<TreeController> OnTreeInRange;
+        public static event Action OnTreeOutOfRange;
 
         void Start()
         {
@@ -25,21 +28,10 @@ namespace ScrollMaster2D.Controllers
                 currentHealth = treeConfig.treeHealth;
             }
 
-            collectButton = GameObject.FindWithTag("CollectButton");
-            if (collectButton != null)
-            {
-                collectButton.SetActive(false);
-            }
-            else
-            {
-                Debug.LogError("Collect button not found. Make sure the button exists in the scene with the 'CollectButton' tag.");
-            }
-
             GameObject player = GameObject.FindWithTag("Player");
             if (player != null)
             {
                 playerTransform = player.transform;
-                Debug.Log("Player found and assigned.");
             }
             else
             {
@@ -51,57 +43,46 @@ namespace ScrollMaster2D.Controllers
 
         void Update()
         {
-            if (playerTransform != null)
+            if (playerTransform == null) return;
+
+            if (IsPlayerInRange())
             {
-                float distance = Vector3.Distance(transform.position, playerTransform.position);
-                Debug.Log($"Distance to player: {distance}"); 
-
-                if (distance <= interactionRange)
+                if (currentInteractableTree != this)
                 {
-                    if (collectButton != null && !collectButton.activeSelf)
-                    {
-                        collectButton.SetActive(true); 
-                        Debug.Log("Player in range, showing collect button");
-                    }
-
-                    if (Input.GetKeyDown(collectKey))
-                    {
-                        CollectResources();
-                    }
+                    currentInteractableTree?.NotifyOutOfRange();
+                    currentInteractableTree = this;
+                    OnTreeInRange?.Invoke(this);
                 }
-                else
+
+                if (Input.GetKeyDown(collectKey))
                 {
-                    if (collectButton != null && collectButton.activeSelf)
-                    {
-                        collectButton.SetActive(false); 
-                        Debug.Log("Player out of range, hiding collect button");
-                    }
+                    CollectResources();
                 }
             }
-            else
+            else if (currentInteractableTree == this)
             {
-                Debug.LogError("Player transform is null. Make sure the player object is correctly tagged and found.");
+                NotifyOutOfRange();
             }
         }
 
-        private void CollectResources()
+        private bool IsPlayerInRange()
         {
-            float distance = Vector3.Distance(transform.position, playerTransform.position);
-            if (distance <= interactionRange)
-            {
-                currentHealth--;
+            return Vector3.Distance(transform.position, playerTransform.position) <= interactionRange;
+        }
 
-                DropResources();
-                StartCoroutine(BounceTree());
+        public void CollectResources()
+        {
+            if (!IsPlayerInRange()) return;
 
-                if (currentHealth <= 0)
-                {
-                    Destroy(gameObject); 
-                }
-            }
-            else
+            currentHealth--;
+
+            DropResources();
+            StartCoroutine(BounceTree());
+
+            if (currentHealth <= 0)
             {
-                Debug.LogWarning($"Player tried to collect resources but is out of range. Distance: {distance}");
+                Destroy(gameObject);
+                NotifyOutOfRange();
             }
         }
 
@@ -146,12 +127,23 @@ namespace ScrollMaster2D.Controllers
             }
         }
 
+ 
+
         private void DropItem(ItemConfig itemConfig, int totalAmount)
         {
             int amountPerDrop = Mathf.Max(1, totalAmount / treeConfig.treeHealth);
             for (int i = 0; i < amountPerDrop; i++)
             {
                 Instantiate(itemConfig.itemPrefab, transform.position, Quaternion.identity);
+            }
+        }
+
+        private void NotifyOutOfRange()
+        {
+            if (currentInteractableTree == this)
+            {
+                OnTreeOutOfRange?.Invoke();
+                currentInteractableTree = null;
             }
         }
 

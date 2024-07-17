@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce63fee4839d5b644b08c80244ecc8a7, type: 3}
+  m_Name: MiningConfig
+  m_EditorClassIdentifier: 
+  activationKey: 120
+  scavationKey: 115
+  miningDatas:
+  - tile: {fileID: 11400000, guid: f43985d41acda204fb6bdd622d59c8de, type: 2}
+    itemConfig: {fileID: 11400000, guid: 29bd813539383374480e605c67c78d73, type: 2}
+    miningTime: 2

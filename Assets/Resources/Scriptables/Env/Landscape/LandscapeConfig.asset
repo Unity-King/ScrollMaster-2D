@@ -12,18 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0ca2b71b7c4b4438a34ea87e8233ab, type: 3}
   m_Name: LandscapeConfig
   m_EditorClassIdentifier: 
-  mapWidth: 50
-  mapHeight: 10
-  grassHeight: 3
-  grassTile: {fileID: 11400000, guid: d9496abe80e25384483d1a40bf38e1f2, type: 2}
-  highAreaPositions: []
-  enemyAreaPositions: []
-  terrainFeatures:
-  - startPosition: {x: 0, y: 0}
-    shape:
-    - {x: 0, y: 0}
-    tile: {fileID: 11400000, guid: d9496abe80e25384483d1a40bf38e1f2, type: 2}
-  - startPosition: {x: 23, y: 0}
-    shape:
-    - {x: 322, y: 3221}
-    tile: {fileID: 11400000, guid: d9496abe80e25384483d1a40bf38e1f2, type: 2}
+  biomes:
+  - name: GreenMountain
+    biomeWidth: 25
+    grassHeight: 25
+    primaryTile: {fileID: 11400000, guid: 8b8ca0a5967a95d408b502bb77dbd1ac, type: 2}
+    secondaryTile: {fileID: 11400000, guid: 0afef987485f2da439b5bb5668d24986, type: 2}
+    mountainAmplitude: 5
+    mountainFrequency: 10
+    treeConfigs:
+    - treeConfig: {fileID: 11400000, guid: d2b3230b09a53dc4b8594da865ba8b47, type: 2}
+      spawnFrequency: 0
+    caveConfig:
+      caveFrequency: 0.1
+      caveThreshold: 0.5
+    enemyAreaConfig:
+      areaFrequency: 0.1
+      enemyTile: {fileID: 11400000, guid: f43985d41acda204fb6bdd622d59c8de, type: 2}
+      enemyConfig:
+        enemyPrefab: {fileID: 1482845684901316342, guid: 373714692d09af842a5a3c4912770566,
+          type: 3}
+        spawnChance: 0.1
+        maxQuantity: 3
+        enemySpawnOffset: 1.5
+      allowTreeSpawn: 0

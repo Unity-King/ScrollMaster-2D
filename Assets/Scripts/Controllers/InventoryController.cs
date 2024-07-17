@@ -43,7 +43,7 @@ namespace ScrollMaster2D.Controllers
             return itemCounts.ContainsKey(itemName) ? itemCounts[itemName] : 0;
         }
 
-        private bool HasInventoryChanged()
+        public bool HasInventoryChanged()
         {
             if (previousItemCounts.Count != itemCounts.Count)
             {

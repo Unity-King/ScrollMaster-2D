@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1106d9a366f986a4cac08092280835db, type: 3}
+  m_Name: BoarBoss
+  m_EditorClassIdentifier: 
+  enemyName: Boar Boss
+  moveSpeed: 5
+  attackDamage: 5
+  maxHealth: 300
+  expValue: 300
+  combatType: 1
+  followRange: 14.8
+  detectionRange: 9.53
+  attackRange: 4.92
+  attackCooldown: 2.66
+  specialAttackChance: 100
+  attackAnimationName: isAttacking
+  spellEffectRange: 0
+  jumpForce: 6
+  teleportAnimationThreshold: 2
+  lootItems:
+  - itemConfig: {fileID: 11400000, guid: 29bd813539383374480e605c67c78d73, type: 2}
+    dropChance: 1
+    minQuantity: 4
+    maxQuantity: 10
