@@ -11,6 +11,7 @@ ScrollMaster 2D é uma base completa para a criação de jogos 2D side-scrolling
 - **Elementos de UI:** Interface de usuário básica com contadores de pontos e vida.
 - **Sistema de Áudio:** Sons de efeitos e música de fundo.
 - **Scripts Bem Documentados:** Fácil modificação e personalização.
+- **Geração procedural para biomas avançado.
 
 ## Estrutura de Pastas
 
