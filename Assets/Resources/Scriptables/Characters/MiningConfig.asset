@@ -16,5 +16,14 @@ MonoBehaviour:
   scavationKey: 115
   miningDatas:
   - tile: {fileID: 11400000, guid: f43985d41acda204fb6bdd622d59c8de, type: 2}
-    itemConfig: {fileID: 11400000, guid: 29bd813539383374480e605c67c78d73, type: 2}
+    itemConfig: {fileID: 11400000, guid: 115be965cbeb69a4a9c9a49f35b05e61, type: 2}
+    miningTime: 2
+  - tile: {fileID: 11400000, guid: 8b8ca0a5967a95d408b502bb77dbd1ac, type: 2}
+    itemConfig: {fileID: 11400000, guid: 36ad23ad1d306f549864cd26c1b61838, type: 2}
+    miningTime: 2
+  - tile: {fileID: 11400000, guid: 0afef987485f2da439b5bb5668d24986, type: 2}
+    itemConfig: {fileID: 11400000, guid: 0696b1517fcf64143812b3485459f63d, type: 2}
+    miningTime: 2
+  - tile: {fileID: 11400000, guid: 9b727f85d43ce344794da5692b0639af, type: 2}
+    itemConfig: {fileID: 11400000, guid: 09eaf360eaf4e244eb013ee7cf5c713a, type: 2}
     miningTime: 2

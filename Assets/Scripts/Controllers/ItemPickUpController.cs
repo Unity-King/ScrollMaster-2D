@@ -4,7 +4,7 @@ namespace ScrollMaster2D.Controllers
 {
     public class ItemPickUpController : MonoBehaviour
     {
-        public ItemConfig itemConfig; // Configuração do item
+        public ItemConfig itemConfig;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -15,7 +15,7 @@ namespace ScrollMaster2D.Controllers
                 {
                     inventory.AddItem(itemConfig.itemName, itemConfig.quantity);
                     Debug.Log($"Picked up {itemConfig.quantity} {itemConfig.itemName}(s).");
-                    Destroy(gameObject); // Destroi o item após ser coletado
+                    Destroy(gameObject);
                 }
             }
         }

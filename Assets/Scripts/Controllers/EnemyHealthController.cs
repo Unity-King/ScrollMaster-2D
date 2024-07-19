@@ -8,8 +8,8 @@ namespace ScrollMaster2D.Controllers
     {
         public int maxHealth = 100;
         public int currentHealth;
-        public Slider healthBarSlider; // Referência ao Slider da barra de saúde na UI
-        public EnemyConfig enemyConfig; // Referência ao EnemyConfig
+        public Slider healthBarSlider; 
+        public EnemyConfig enemyConfig;
         private EnemyExpController expController;
 
         void Start()

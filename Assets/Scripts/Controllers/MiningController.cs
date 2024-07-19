@@ -9,10 +9,11 @@ namespace ScrollMaster2D.Controllers
     {
         public MiningConfig miningConfig;
         public Camera mainCamera;
-        public Tilemap tilemap;
+        public Tilemap[] tilemaps; 
 
         private TileBase currentHighlightedTile;
         private Vector3Int previousMousePosition;
+        private Tilemap currentTilemap;
         private bool isEditorMode = false;
         private float startTime;
 
@@ -44,8 +45,7 @@ namespace ScrollMaster2D.Controllers
             isEditorMode = !isEditorMode;
             if (!isEditorMode && currentHighlightedTile != null)
             {
-                // Reset tile color when exiting edit mode
-                tilemap.SetColor(previousMousePosition, Color.white);
+                currentTilemap.SetColor(previousMousePosition, Color.white);
                 currentHighlightedTile = null;
             }
         }
@@ -53,22 +53,28 @@ namespace ScrollMaster2D.Controllers
         private void HandleTileHighlight()
         {
             Vector3 worldPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int mousePos = tilemap.WorldToCell(worldPos);
+            Vector3Int mousePos = WorldToCell(worldPos);
 
             if (mousePos != previousMousePosition)
             {
                 if (currentHighlightedTile != null)
                 {
-                    tilemap.SetColor(previousMousePosition, Color.white);  // Reset highlight
+                    currentTilemap.SetColor(previousMousePosition, Color.white); 
                 }
 
-                if (tilemap.HasTile(mousePos))
+                foreach (var tilemap in tilemaps)
                 {
-                    currentHighlightedTile = tilemap.GetTile(mousePos);
-                    tilemap.SetColor(mousePos, Color.yellow);  // Highlight the tile
-                    previousMousePosition = mousePos;
+                    if (tilemap.HasTile(mousePos))
+                    {
+                        currentTilemap = tilemap;
+                        currentHighlightedTile = tilemap.GetTile(mousePos);
+                        tilemap.SetColor(mousePos, Color.yellow); 
+                        previousMousePosition = mousePos;
+                        break;
+                    }
                 }
-                else
+
+                if (currentTilemap == null)
                 {
                     currentHighlightedTile = null;
                 }
@@ -82,10 +88,10 @@ namespace ScrollMaster2D.Controllers
 
         private void UpdateScavation(Vector3Int position)
         {
-            if (tilemap.GetTile(position) == currentHighlightedTile)
+            if (currentTilemap.GetTile(position) == currentHighlightedTile)
             {
                 float progress = (Time.time - startTime) / GetMiningData(currentHighlightedTile).Value.miningTime;
-                tilemap.SetColor(position, Color.Lerp(Color.yellow, Color.black, progress));
+                currentTilemap.SetColor(position, Color.Lerp(Color.yellow, Color.black, progress));
 
                 if (progress >= 1.0f)
                 {
@@ -96,13 +102,13 @@ namespace ScrollMaster2D.Controllers
 
         private void BreakTile(Vector3Int tilePosition)
         {
-            var miningData = GetMiningData(tilemap.GetTile(tilePosition));
+            var miningData = GetMiningData(currentTilemap.GetTile(tilePosition));
             if (miningData != null)
             {
-                tilemap.SetTile(tilePosition, null);  // Remove the tile
-                Instantiate(miningData.Value.itemConfig.itemPrefab, tilemap.GetCellCenterWorld(tilePosition), Quaternion.identity);  // Drop item
-                tilemap.SetColor(tilePosition, Color.white);  // Reset color
-                currentHighlightedTile = null;  // Clear the highlighted tile
+                currentTilemap.SetTile(tilePosition, null);  
+                Instantiate(miningData.Value.itemConfig.itemPrefab, currentTilemap.GetCellCenterWorld(tilePosition), Quaternion.identity);  
+                currentTilemap.SetColor(tilePosition, Color.white); 
+                currentHighlightedTile = null; 
             }
         }
 
@@ -116,6 +122,19 @@ namespace ScrollMaster2D.Controllers
                 }
             }
             return null;
+        }
+
+        private Vector3Int WorldToCell(Vector3 worldPosition)
+        {
+            foreach (var tilemap in tilemaps)
+            {
+                Vector3Int cellPosition = tilemap.WorldToCell(worldPosition);
+                if (tilemap.HasTile(cellPosition))
+                {
+                    return cellPosition;
+                }
+            }
+            return Vector3Int.zero;
         }
     }
 }

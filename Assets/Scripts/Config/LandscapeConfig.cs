@@ -12,47 +12,73 @@ namespace ScrollMaster2D.Config
         public struct Biome
         {
             public string name;
-            public int biomeWidth; // Largura do bioma
-            public int grassHeight;
-            public TileBase primaryTile;
-            public TileBase secondaryTile;
-            public float mountainAmplitude;
+            public int biomeWidth;
+            public int biomeHeight;
+
+            public string grassTilemapName;
+            public TileBase grassTile;
+            public float grassAmplitude;
             public float mountainFrequency;
+
+            public string rockTilemapName;
+            public TileBase rockTile;
+            public CaveConfig caveConfig;
+
+            public string dirtTilemapName;
+            public TileBase dirtTile;
+            public DirtConfig dirtConfig;
+
+            public string oreTilemapName;
+            public OreConfig[] oreConfigs; // Permitir múltiplas configurações de minério
+
             public TreeSpawnConfig[] treeConfigs;
-            public CaveConfig caveConfig; // Configuração das cavernas
-            public EnemyAreaConfig enemyAreaConfig; // Configuração da área inimiga
         }
 
         [System.Serializable]
         public struct TreeSpawnConfig
         {
             public TreeConfig treeConfig;
-            public float spawnFrequency; // Frequência de spawn das árvores
+            public float spawnFrequency;
         }
 
         [System.Serializable]
         public struct CaveConfig
         {
-            public float caveFrequency; // Frequência do ruído para geração de cavernas
-            public float caveThreshold; // Limite para determinar se um tile é parte de uma caverna
+            public float caveFrequency;
+            public float caveThreshold;
+            public bool enablePlayerSpaces;
+            public Vector2Int playerSpaceRange;
         }
 
         [System.Serializable]
-        public struct EnemyAreaConfig
+        public struct DirtConfig
         {
-            public float areaFrequency; // Frequência da área inimiga no bioma
-            public TileBase enemyTile; // Tile da área inimiga
-            public EnemyConfig enemyConfig; // Configuração dos inimigos
-            public bool allowTreeSpawn; // Permitir ou não o spawn de árvores
+            public float spawnChance;
+            public float dirtFrequency;
+            public int dirtDepth;
+            public int dirtRadius;
+            public EnemyConfig enemyConfig;
+
+            public float enemySpawnFrequency;
+            public float enemySpawnRange;
+        }
+
+        [System.Serializable]
+        public struct OreConfig
+        {
+            public TileBase oreTile;
+            public float spawnChance;
+            public float oreFrequency;
+            public int oreDepth;
         }
 
         [System.Serializable]
         public struct EnemyConfig
         {
-            public GameObject enemyPrefab; // Prefab do inimigo
-            public float spawnChance; // Chance de spawn
-            public int maxQuantity; // Quantidade máxima de inimigos
-            public float enemySpawnOffset; // Distância mínima entre inimigos
+            public GameObject enemyPrefab;
+            public float spawnChance;
+            public int maxQuantity;
+            public float enemySpawnOffset;
         }
     }
 }

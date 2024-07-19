@@ -7,6 +7,7 @@ public enum ItemCategory
     Foods,
     Tools,
     Golds,
+    Grounds,
     Other
 }
 

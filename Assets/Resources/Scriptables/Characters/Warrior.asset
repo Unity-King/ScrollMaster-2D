@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Warrior
   m_EditorClassIdentifier: 
   characterName: Len The Warrior
-  level: 1
-  maxHealth: 100
-  attackPower: 10
-  defense: 5
+  level: 2
+  maxHealth: 110
+  attackPower: 12
+  defense: 6
   moveSpeed: 5
+  inventorySlots: 20
   spells:
   - {fileID: 11400000, guid: 886b3a4e30f720b48be9290a5f8df094, type: 2}
   animatorController: {fileID: 9100000, guid: b2698ed8b9bcb374d86b041f32c48574, type: 2}

@@ -5,7 +5,7 @@ namespace ScrollMaster2D.Controllers
     [CreateAssetMenu(fileName = "TeleportAttack", menuName = "ScrollMaster2D/Abilities/TeleportAttack", order = 1)]
     public class TeleportAttack : ScriptableObject
     {
-        public float teleportDistance = 2f; // Distância de teletransporte para perto do jogador
+        public float teleportDistance = 2f;
 
         public void Execute(Transform enemyTransform, Transform playerTransform)
         {

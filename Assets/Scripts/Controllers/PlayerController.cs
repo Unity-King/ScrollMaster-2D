@@ -10,8 +10,8 @@ namespace ScrollMaster2D.Controllers
         public Character characterConfig;
         public float jumpForce = 10f;
         public float attackCooldown = 0.5f;
-        public GameObject sword; // Referência ao objeto da espada
-        public Collider2D swordCollider; // Referência ao Collider da espada
+        public GameObject sword;
+        public Collider2D swordCollider;
 
         [SerializeField]
         private float currentSpeed;
@@ -43,12 +43,12 @@ namespace ScrollMaster2D.Controllers
         private AnimatorCharacter animatorController;
         private Rigidbody2D rb;
         public Health healthController;
-        public Stats statsController; // Referência ao Stats
+        public Stats statsController;
         public Exp expController;
-        private float nextAttackTime = 0f;
-        private bool isGrounded;
-        private bool isFacingRight = true;
-        private int attackCount = 0;
+        public float nextAttackTime = 0f;
+        public bool isGrounded;
+        public bool isFacingRight = true;
+        public int attackCount = 0;
 
         void Start()
         {
@@ -63,7 +63,7 @@ namespace ScrollMaster2D.Controllers
 
             if (swordCollider != null)
             {
-                swordCollider.enabled = false; // Desativa o Collider da espada inicialmente
+                swordCollider.enabled = false; 
             }
         }
 
@@ -176,9 +176,9 @@ namespace ScrollMaster2D.Controllers
 
         private IEnumerator PerformSwordAttack()
         {
-            swordCollider.enabled = true; // Ativa o Collider da espada
-            yield return new WaitForSeconds(0.5f); // Duração da animação de ataque
-            swordCollider.enabled = false; // Desativa o Collider da espada
+            swordCollider.enabled = true; 
+            yield return new WaitForSeconds(0.5f);
+            swordCollider.enabled = false; 
         }
 
         private void HandleSpells()

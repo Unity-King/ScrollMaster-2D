@@ -5,7 +5,7 @@ namespace ScrollMaster2D.Controllers
 {
     public class EnemyExpController : MonoBehaviour
     {
-        public EnemyConfig enemyConfig; // Referência ao EnemyConfig
+        public EnemyConfig enemyConfig;
 
         public void GiveExpToPlayer()
         {
