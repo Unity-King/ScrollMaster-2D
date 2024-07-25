@@ -14,39 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   biomes:
   - name: GreenMountain
-    biomeWidth: 100
+    biomeWidth: 1000
     biomeHeight: 100
     grassTilemapName: Grass
     grassTile: {fileID: 11400000, guid: 8b8ca0a5967a95d408b502bb77dbd1ac, type: 2}
-    grassAmplitude: 24.9
-    mountainFrequency: 0.1
+    grassAmplitude: 50
+    mountainFrequency: 0.02
     rockTilemapName: Rock
     rockTile: {fileID: 11400000, guid: 0afef987485f2da439b5bb5668d24986, type: 2}
     caveConfig:
       caveFrequency: 0.07
-      caveThreshold: 0.4
+      caveThreshold: 0.29
       enablePlayerSpaces: 1
       playerSpaceRange: {x: 1, y: 3}
     dirtTilemapName: Dirt
     dirtTile: {fileID: 11400000, guid: f43985d41acda204fb6bdd622d59c8de, type: 2}
     dirtConfig:
-      spawnChance: 1
-      dirtFrequency: 0.01
-      dirtDepth: 5
+      spawnChance: 0.8
+      dirtFrequency: 0.04
+      dirtDepth: 2
       dirtRadius: 4
       enemyConfig:
-        enemyPrefab: {fileID: 0}
-        spawnChance: 0
-        maxQuantity: 0
-        enemySpawnOffset: 0
-      enemySpawnFrequency: 0
-      enemySpawnRange: 0
+        enemyPrefab: {fileID: 1482845684901316342, guid: 373714692d09af842a5a3c4912770566,
+          type: 3}
+        spawnChance: 0.1
+        maxQuantity: 1
+        enemySpawnOffset: 0.2
+      enemySpawnFrequency: 0.1
+      enemySpawnRange: 0.2
     oreTilemapName: Ore
     oreConfigs:
     - oreTile: {fileID: 11400000, guid: 9b727f85d43ce344794da5692b0639af, type: 2}
       spawnChance: 0.5
       oreFrequency: 0.1
       oreDepth: 10
+    - oreTile: {fileID: 11400000, guid: e269e78fcd833e14ea229f4792c8572c, type: 2}
+      spawnChance: 0.7
+      oreFrequency: 0.5
+      oreDepth: 15
     treeConfigs:
     - treeConfig: {fileID: 11400000, guid: d2b3230b09a53dc4b8594da865ba8b47, type: 2}
-      spawnFrequency: 0.1
+      spawnFrequency: 0.05
