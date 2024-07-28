@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce63fee4839d5b644b08c80244ecc8a7, type: 3}
+  m_Name: MiningConfig
+  m_EditorClassIdentifier: 
+  activationKey: 120
+  scavationKey: 115
+  miningDatas:
+  - tile: {fileID: 11400000, guid: f43985d41acda204fb6bdd622d59c8de, type: 2}
+    itemConfig: {fileID: 11400000, guid: 115be965cbeb69a4a9c9a49f35b05e61, type: 2}
+    miningTime: 2
+  - tile: {fileID: 11400000, guid: 8b8ca0a5967a95d408b502bb77dbd1ac, type: 2}
+    itemConfig: {fileID: 11400000, guid: 36ad23ad1d306f549864cd26c1b61838, type: 2}
+    miningTime: 2
+  - tile: {fileID: 11400000, guid: 0afef987485f2da439b5bb5668d24986, type: 2}
+    itemConfig: {fileID: 11400000, guid: 0696b1517fcf64143812b3485459f63d, type: 2}
+    miningTime: 2
+  - tile: {fileID: 11400000, guid: 9b727f85d43ce344794da5692b0639af, type: 2}
+    itemConfig: {fileID: 11400000, guid: 09eaf360eaf4e244eb013ee7cf5c713a, type: 2}
+    miningTime: 2

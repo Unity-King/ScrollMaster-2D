@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d2aa6023cb3f74cb39dc1610a23def, type: 3}
+  m_Name: SmallTree
+  m_EditorClassIdentifier: 
+  treePrefab: {fileID: 409314651831196518, guid: 70199024916dbb34cb6e45e81178277a,
+    type: 3}
+  heightOffset: 1.65
+  topColliderOffset: 0
+  treeHealth: 5
+  woodItem: {fileID: 11400000, guid: 7132a8176d48a3949aee3afecdd60b37, type: 2}
+  stickItem: {fileID: 11400000, guid: 6958afc954dc73a48b0f29fd62dc0750, type: 2}
+  woodAmount: 3
+  stickAmount: 1
